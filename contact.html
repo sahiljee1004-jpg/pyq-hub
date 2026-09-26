@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact — PYQs Hub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                <span>PYQs</span> Hub
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a
+                    href="contact.html"
+                    class="active"
+                >
+                    Contact
+                </a>
+
+
+                <!-- PROFILE CIRCLE -->
+
+                <a
+                    href="profile.html"
+                    id="profileCircle"
+                    class="profile-circle"
+                    style="display: none;"
+                    aria-label="Profile"
+                >
+                    <span id="profileInitial">
+                        ?
+                    </span>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+        <section class="contact-section">
+
+            <div class="container">
+
+
+                <!-- PAGE HEADER -->
+
+                <div class="contact-header">
+
+                    <p class="section-label">
+                        GET IN TOUCH
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     CONTACT FORM
+                ================================================== -->
+
+                <div class="contact-card">
+
+                    <form id="contactForm">
+
+
+                        <!-- NAME -->
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- MESSAGE -->
+
+                        <div class="form-group">
+
+                            <label for="message">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="7"
+                                placeholder="Write your message..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <p
+                            id="contactStatus"
+                            class="contact-status"
+                        ></p>
+
+
+                        <!-- SEND -->
+
+                        <button
+                            type="submit"
+                            id="sendButton"
+                            class="btn primary contact-submit"
+                        >
+                            Send on WhatsApp
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © <span id="year"></span> PYQs Hub.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/auth.js"
+    ></script>
+    <script
+        type="module"
+        src="js/contact.js"
+    ></script>
+
+
+</body>
+
+</html>

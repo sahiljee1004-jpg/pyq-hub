@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login — PYQs Hub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         LOGIN PAGE
+    ====================================================== -->
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+
+            <a
+                href="index.html"
+                class="brand center"
+            >
+                <span>PYQs</span> Hub
+            </a>
+
+
+            <!-- HEADING -->
+
+            <p class="eyebrow">
+                WELCOME BACK
+            </p>
+
+            <h1>
+                Login
+            </h1>
+
+            <p class="muted">
+                Login to access your profile.
+            </p>
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================== -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <label>
+
+                    Email
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- PASSWORD -->
+
+                <label>
+
+                    Password
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="forgotPassword"
+                        class="forgot-password"
+                    >
+                        Forgot password?
+                    </button>
+
+                </label>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Login
+                </button>
+
+
+            </form>
+
+
+            <!-- =================================================
+                 GOOGLE LOGIN
+            ================================================== -->
+
+            <button
+                type="button"
+                id="googleLogin"
+                class="google-btn"
+            >
+                Continue with Google
+            </button>
+
+
+            <!-- STATUS -->
+
+            <p
+                id="authStatus"
+                class="status"
+            ></p>
+
+
+            <!-- =================================================
+                 SIGNUP
+            ================================================== -->
+
+            <p class="auth-switch">
+
+                Don't have an account?
+
+                <a href="signup.html">
+                    Sign up
+                </a>
+
+            </p>
+
+
+            <!-- =================================================
+                 HOME
+            ================================================== -->
+
+            <p class="auth-switch">
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/auth.js"
+    ></script>
+
+
+</body>
+
+</html>

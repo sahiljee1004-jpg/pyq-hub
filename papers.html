@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Papers — PYQs Hub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                <span>PYQs</span> Hub
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    id="profileCircle"
+                    class="profile-circle"
+                    style="display:none;"
+                    aria-label="Profile"
+                >
+                    <span id="profileInitial">?</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+        <section class="papers-page">
+
+            <div class="container">
+
+
+                <!-- BACK -->
+
+                <a
+                    href="#"
+                    id="backLink"
+                    class="back-link"
+                >
+                    ← Back to Exam
+                </a>
+
+
+
+                <!-- HEADER -->
+
+                <div class="papers-hero">
+
+                    <div class="papers-icon">
+                        📚
+                    </div>
+
+                    <p class="section-label">
+                        QUESTION PAPERS
+                    </p>
+
+                    <h1 id="papersTitle">
+                        Loading...
+                    </h1>
+
+                    <p id="papersDescription">
+                        Loading question papers...
+                    </p>
+
+                </div>
+
+
+
+                <!-- PAPERS HEADING -->
+
+                <div class="papers-section-top">
+
+                    <div>
+
+                        <h2>
+                            Available Papers
+                        </h2>
+
+                        <p>
+                            Select a paper to view or download
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="paperCount"
+                        class="paper-count"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- PAPER LIST -->
+
+                <div
+                    id="paperList"
+                    class="paper-list"
+                >
+
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Loading papers...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         PDF VIEWER MODAL
+    ====================================================== -->
+
+    <div
+        id="paperViewer"
+        class="pdf-viewer hidden"
+    >
+
+        <div class="pdf-viewer-header">
+
+            <div class="pdf-viewer-title">
+
+                <span class="pdf-icon">
+                    📄
+                </span>
+
+                <span id="viewerTitle">
+                    Question Paper
+                </span>
+
+            </div>
+
+
+            <div class="pdf-viewer-actions">
+
+                <a
+                    id="viewOriginal"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="viewer-original"
+                >
+                    Open Original
+                </a>
+
+
+                <button
+                    type="button"
+                    id="closeViewer"
+                    class="viewer-close"
+                    aria-label="Close PDF"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="pdf-viewer-body">
+
+            <iframe
+                id="pdfFrame"
+                title="Question Paper PDF"
+                src="about:blank"
+            ></iframe>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © <span id="year"></span>
+                PYQs Hub. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/auth.js"
+    ></script>
+
+    <script
+        type="module"
+        src="js/papers.js"
+    ></script>
+
+
+</body>
+
+</html>

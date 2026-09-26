@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Resources — PYQs Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/resources.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo"><span>PYQs</span> Hub</a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="resources.html" class="active">Study Resources</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" id="authButton" class="auth-button">Login/Sign up</a>
+                <a href="profile.html" id="profileCircle" class="profile-circle" style="display:none;" aria-label="Profile"></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="resource-page container">
+        <div class="resource-heading">
+            <p class="section-label">REFERENCE LIBRARY</p>
+            <h1>Study Resources</h1>
+            <p>Browse subject notes and chapter materials by exam.</p>
+        </div>
+        <p id="resourceStatus" class="resource-status" aria-live="polite">Loading resources...</p>
+        <div id="resourceList" class="resource-list" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="year"></span> PYQs Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/resources.js"></script>
+</body>
+</html>

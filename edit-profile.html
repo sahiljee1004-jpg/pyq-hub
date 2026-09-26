@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Profile — PYQs Hub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <a href="index.html" class="logo">
+            <span>PYQs</span> Hub
+        </a>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="profile.html" class="profile-nav">
+                Profile
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <section class="profile-page">
+
+        <div class="container">
+
+            <div class="profile-heading">
+
+                <p class="section-label">
+                    MY ACCOUNT
+                </p>
+
+                <h1>
+                    Edit Profile
+                </h1>
+
+                <p>
+                    Update your PYQs Hub profile information.
+                </p>
+
+            </div>
+
+
+            <div class="edit-profile-card">
+
+                <div class="profile-avatar-large" id="profileAvatar">
+                    U
+                </div>
+
+
+                <form id="editProfileForm">
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <div
+                        id="message"
+                        class="profile-message"
+                    ></div>
+
+
+                    <div class="edit-actions">
+
+                        <button
+                            type="submit"
+                            id="saveButton"
+                            class="btn primary"
+                        >
+                            Save Changes
+                        </button>
+
+                        <a
+                            href="profile.html"
+                            class="btn"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            © <span id="year"></span> PYQs Hub.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    type="module"
+    src="js/edit-profile.js"
+></script>
+
+</body>
+
+</html>

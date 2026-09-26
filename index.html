@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PYQs Hub — Previous Year Question Papers</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+
+            <!-- NAVIGATION -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                <span>PYQs</span> Hub
+            </a>
+
+
+         <nav class="nav">
+
+    <a
+        href="index.html"
+        class="active"
+    >
+        Home
+    </a>
+
+    <a href="resources.html">
+        Study Resources
+    </a>
+
+    <a href="contact.html">
+        Contact
+    </a>
+
+    <a
+        href="login.html"
+        id="authButton"
+        class="auth-button"
+    >
+        Login/Sign up
+    </a>
+
+    <a
+        href="profile.html"
+        id="profileCircle"
+        class="profile-circle"
+        style="display:none;"
+        aria-label="Profile"
+    >
+    </a>
+
+</nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="container">
+
+                <p class="eyebrow">
+                    PREVIOUS YEAR QUESTION PAPERS
+                </p>
+
+                <h1>
+                    Prepare Better with
+                    <span>PYQs Hub</span>
+                </h1>
+
+                <p class="hero-description">
+                    Find previous year question papers
+                    for JEE, NEET, SSC, Banking and
+                    other competitive examinations.
+                </p>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search exam e.g. JEE Main, SSC CGL..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        id="searchButton"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EXAMS
+        ================================================== -->
+
+        <section class="exams-section">
+
+            <div class="container">
+
+
+                <!-- SECTION HEADER -->
+
+                <div class="section-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            EXAM LIBRARY
+                        </p>
+
+                        <h2>
+                            Choose Your Exam
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        id="examCount"
+                        class="exam-count"
+                    >
+                        Loading...
+                    </div>
+
+                </div>
+
+
+                <!-- EXAM GRID -->
+
+                <div
+                    id="examGrid"
+                    class="exam-grid"
+                >
+
+                    <div class="loading">
+                        Loading exams...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © <span id="year"></span> PYQs Hub.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- =====================================================
+     LOGIN / SIGNUP MODAL
+====================================================== -->
+
+<div
+    id="authModal"
+    class="auth-modal"
+    aria-hidden="true"
+>
+
+    <div class="auth-modal-overlay"></div>
+
+
+    <div
+        class="auth-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="authModalTitle"
+    >
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            type="button"
+            id="closeAuthModal"
+            class="auth-modal-close"
+            aria-label="Close"
+        >
+            &times;
+        </button>
+
+
+        <!-- TITLE -->
+
+        <div class="auth-modal-header">
+
+            <p class="section-label">
+                WELCOME TO PYQs HUB
+            </p>
+
+            <h2 id="authModalTitle">
+                Login to continue
+            </h2>
+
+            <p>
+                Login or create an account to access
+                your profile.
+            </p>
+
+        </div>
+
+
+        <!-- TABS -->
+
+        <div class="auth-tabs">
+
+            <button
+                type="button"
+                id="loginTab"
+                class="auth-tab active"
+            >
+                Login
+            </button>
+
+            <button
+                type="button"
+                id="signupTab"
+                class="auth-tab"
+            >
+                Sign Up
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             LOGIN FORM
+        ================================================== -->
+
+        <form
+            id="loginForm"
+            class="auth-modal-form"
+        >
+
+            <label>
+                Email
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Password
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    id="forgotPassword"
+                    class="forgot-password"
+                >
+                    Forgot password?
+                </button>
+
+            </label>
+
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Login
+            </button>
+
+        </form>
+
+        <p class="auth-switch modal-auth-switch">
+            Don't have an account?
+            <button type="button" id="switchToSignup">Sign up</button>
+        </p>
+
+
+        <!-- =================================================
+             SIGNUP FORM
+        ================================================== -->
+
+        <form
+            id="signupForm"
+            class="auth-modal-form"
+            style="display:none;"
+        >
+
+            <label>
+                Full Name
+
+                <input
+                    type="text"
+                    id="signupName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Email
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Password
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Confirm Password
+
+                <input
+                    type="password"
+                    id="signupConfirmPassword"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+            </label>
+
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="auth-switch modal-auth-switch">
+            Already have an account?
+            <button type="button" id="switchToLogin">Login</button>
+        </p>
+
+
+        <!-- GOOGLE -->
+
+        <div class="auth-divider">
+            <span>OR</span>
+        </div>
+
+
+        <button
+            type="button"
+            id="googleLogin"
+            class="google-btn"
+        >
+            Continue with Google
+        </button>
+
+
+        <!-- STATUS -->
+
+        <p
+            id="authStatus"
+            class="status"
+        ></p>
+
+
+        <p class="auth-modal-note">
+            You can close this window and continue browsing.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <!-- Firebase/Auth + Profile Circle -->
+
+    <script
+        type="module"
+        src="js/auth.js"
+    ></script>
+
+    <!-- Home / Exams -->
+
+    <script
+        type="module"
+        src="js/home.js"
+    ></script>
+
+
+</body>
+
+</html>

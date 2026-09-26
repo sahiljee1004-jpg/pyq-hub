@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile — PYQs Hub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =====================================================
+           PROFILE PAGE
+        ===================================================== */
+
+        .profile-page {
+            padding: 70px 0 100px;
+            min-height: calc(100vh - 150px);
+        }
+
+        .profile-heading {
+            margin-bottom: 35px;
+        }
+
+        .profile-heading .eyebrow {
+            margin-bottom: 10px;
+        }
+
+        .profile-heading h1 {
+            margin-bottom: 8px;
+        }
+
+        .profile-heading p {
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           PROFILE CARD
+        ===================================================== */
+
+        .profile-card {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 42px;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid #e5e7eb;
+            border-radius: 26px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+        }
+
+
+        /* =====================================================
+           PROFILE TOP
+        ===================================================== */
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+
+        /* =====================================================
+           AVATAR
+        ===================================================== */
+
+        .profile-avatar {
+            width: 105px;
+            height: 105px;
+            min-width: 105px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color: white;
+            font-size: 32px;
+            font-weight: 800;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        /* =====================================================
+           PROFILE NAME
+        ===================================================== */
+
+        .profile-main-info h2 {
+            margin: 0 0 7px;
+            font-size: 30px;
+            color: #172554;
+        }
+
+        .profile-main-info p {
+            margin: 0;
+            color: #64748b;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           INFORMATION BOXES
+        ===================================================== */
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-top: 32px;
+        }
+
+        .profile-info-box {
+            padding: 24px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 18px;
+        }
+
+        .profile-info-box span {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 1.2px;
+
+            color: #64748b;
+        }
+
+        .profile-info-box strong {
+            display: block;
+
+            font-size: 17px;
+
+            color: #1e293b;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .profile-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            margin-top: 32px;
+        }
+
+        .profile-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .profile-action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .edit-profile-btn {
+            color: white;
+            background: #2563eb;
+
+            box-shadow:
+                0 8px 18px rgba(37, 99, 235, 0.20);
+        }
+
+        .edit-profile-btn:hover {
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.30);
+        }
+
+        .logout-profile-btn {
+            color: #334155;
+            background: white;
+
+            border: 1px solid #cbd5e1;
+        }
+
+        .logout-profile-btn:hover {
+            background: #f8fafc;
+        }
+
+
+        /* =====================================================
+           HEADER NAVIGATION
+        ===================================================== */
+
+        .profile-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-nav-link {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 9px 15px;
+
+            color: #334155;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .profile-nav-link:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 750px) {
+
+            .profile-page {
+                padding: 45px 15px 70px;
+            }
+
+            .profile-card {
+                padding: 25px;
+                border-radius: 20px;
+            }
+
+            .profile-top {
+                align-items: flex-start;
+            }
+
+            .profile-avatar {
+                width: 78px;
+                height: 78px;
+                min-width: 78px;
+
+                font-size: 25px;
+            }
+
+            .profile-main-info h2 {
+                font-size: 23px;
+            }
+
+            .profile-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-wrap: wrap;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                <span>PYQs</span> Hub
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="profile-nav">
+
+                <a
+                    href="index.html"
+                    class="profile-nav-link"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="contact.html"
+                    class="profile-nav-link"
+                >
+                    Contact
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="profile-page">
+
+        <div class="container">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="profile-heading">
+
+                <p class="eyebrow">
+                    MY ACCOUNT
+                </p>
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p class="muted">
+                    Manage your PYQs Hub account.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROFILE CARD
+            ================================================== -->
+
+            <section class="profile-card">
+
+
+                <!-- PROFILE TOP -->
+
+                <div class="profile-top">
+
+
+                    <!-- AVATAR -->
+
+                    <div
+                        id="profileAvatar"
+                        class="profile-avatar"
+                    >
+                        U
+                    </div>
+
+
+                    <!-- NAME + EMAIL -->
+
+                    <div class="profile-main-info">
+
+                        <h2 id="profileName">
+                            Loading...
+                        </h2>
+
+                        <p id="profileEmail">
+                            Loading...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INFORMATION
+                ================================================== -->
+
+                <div class="profile-info-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="profile-info-box">
+
+                        <span>
+                            NAME
+                        </span>
+
+                        <strong id="profileNameBox">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="profile-info-box">
+
+                        <span>
+                            EMAIL
+                        </span>
+
+                        <strong id="profileEmailBox">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <!-- ACCOUNT -->
+
+                    <div class="profile-info-box">
+
+                        <span>
+                            ACCOUNT
+                        </span>
+
+                        <strong>
+                            PYQs Hub Member
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <div class="profile-actions">
+
+
+                    <!-- EDIT -->
+
+                    <a
+                        href="edit-profile.html"
+                        class="profile-action-btn edit-profile-btn"
+                    >
+                        Edit Profile
+                    </a>
+
+
+                    <!-- LOGOUT -->
+
+                    <button
+                        type="button"
+                        id="logoutButton"
+                        class="profile-action-btn logout-profile-btn"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © <span id="year"></span> PYQs Hub.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const year =
+            document.getElementById("year");
+
+        if (year) {
+            year.textContent =
+                new Date().getFullYear();
+        }
+
+    </script>
+
+
+    <script
+        type="module"
+        src="js/profile.js"
+    ></script>
+
+
+</body>
+
+</html>

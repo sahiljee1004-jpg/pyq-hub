@@ -1,0 +1,144 @@
+.resource-page {
+    min-height: calc(100vh - 150px);
+    padding-top: 54px;
+    padding-bottom: 72px;
+}
+
+.resource-heading {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #dce3ed;
+}
+
+.resource-heading h1 {
+    margin: 6px 0 8px;
+    color: #17213d;
+    font-size: 38px;
+    line-height: 1.15;
+}
+
+.resource-heading > p:last-child,
+.resource-status {
+    color: #5e687c;
+}
+
+.resource-status {
+    padding: 18px 0 8px;
+    font-size: 14px;
+}
+
+.resource-list {
+    border-top: 1px solid #dce3ed;
+}
+
+.resource-empty,
+.resource-error {
+    padding: 28px 0;
+    color: #5e687c;
+}
+
+.resource-error {
+    color: #a33434;
+}
+
+.resource-exam {
+    border-bottom: 1px solid #dce3ed;
+}
+
+.resource-exam > summary {
+    padding: 19px 4px;
+    color: #17213d;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.resource-subjects {
+    padding: 0 0 18px 18px;
+}
+
+.resource-subject {
+    margin: 4px 0 14px;
+    padding-left: 16px;
+    border-left: 2px solid #2d8b74;
+}
+
+.resource-subject > summary {
+    padding: 7px 0;
+    color: #225f52;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.resource-topics {
+    padding: 2px 0 4px 15px;
+}
+
+.resource-topic {
+    margin: 8px 0;
+}
+
+.resource-topic > summary {
+    padding: 5px 0;
+    color: #39445a;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.resource-materials {
+    display: grid;
+    gap: 7px;
+    padding: 4px 0 8px 18px;
+}
+
+.resource-material {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px solid #e8edf3;
+}
+
+.resource-material-copy h3 {
+    color: #17213d;
+    font-size: 15px;
+}
+
+.resource-material-copy p {
+    margin-top: 3px;
+    color: #667085;
+    font-size: 13px;
+}
+
+.resource-material a {
+    flex: 0 0 auto;
+    color: #176c59;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.resource-material a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 650px) {
+    .resource-page {
+        padding-top: 34px;
+    }
+
+    .resource-heading h1 {
+        font-size: 32px;
+    }
+
+    .resource-subjects {
+        padding-left: 8px;
+    }
+
+    .resource-material {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
