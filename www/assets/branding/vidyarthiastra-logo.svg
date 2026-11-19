@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 110" role="img" aria-labelledby="title">
+  <title id="title">VidyarthiAstra</title>
+  <g fill="none" stroke="#182132" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M12 31c22-10 43-7 59 4v61c-18-13-38-16-59-7z" fill="#182132"/>
+    <path d="M130 31c-22-10-43-7-59 4v61c18-13 38-16 59-7z" fill="#182132"/>
+    <path d="M71 35v60" stroke="#fff" stroke-width="4"/>
+    <path d="M17 88c19-7 37-3 54 8 17-11 35-15 54-8" stroke="#182132" stroke-width="5"/>
+  </g>
+  <path d="M71 1 78 16 94 18 82 29 85 45 71 37 57 45 60 29 48 18 64 16z" fill="#b69b64"/>
+  <text x="155" y="82" fill="#182132" font-family="Trebuchet MS, Arial, sans-serif" font-size="61" font-weight="700">VidyarthiAstra</text>
+</svg>

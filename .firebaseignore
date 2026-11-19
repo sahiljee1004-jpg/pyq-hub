@@ -1,0 +1,17 @@
+# Firebase deployment ignore file
+# Prevent accidental deployment of sensitive credentials, environment files, tests, and admin scripts
+
+serviceAccountKey*.json
+*.serviceAccountKey.json
+.env
+.env.*
+.git
+.github
+node_modules/
+scratch/
+tests/
+scripts/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+

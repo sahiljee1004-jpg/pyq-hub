@@ -1,0 +1,1125 @@
+/* ============================================================
+   VIDYARTHIASTRA — DEDICATED PYQ LIBRARY STYLESHEET
+   Light Academic Identity (Cohesive with Mock Tests, Live Updates, and Study Resources)
+   Page background: #f8fafc | Card background: #ffffff | Primary: #2563eb
+   Typography: Inter, system-ui | Headings: #0f172a, #1e293b | Text: #475569, #64748b
+   ============================================================ */
+
+/* Page Container */
+.pyq-library-page {
+    padding: 2.5rem 0 4.5rem 0;
+    min-height: calc(100vh - 160px);
+    background: #f8fafc;
+    color: #0f172a;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Page Header & Banner */
+.pyq-hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.pyq-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    background: #e0e7ff;
+    color: #3730a3;
+    margin-bottom: 0.75rem;
+}
+
+.pyq-hero h1 {
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+.pyq-tagline {
+    font-size: 1.05rem;
+    color: #64748b;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.55;
+}
+
+/* Search Toolbar & Total PYQ Counter */
+.pyq-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+}
+
+.pyq-search-container {
+    flex: 1 1 360px;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.pyq-search-input-wrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.pyq-search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pyq-search-input {
+    width: 100%;
+    height: 46px;
+    padding: 0 40px 0 42px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0f172a;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.pyq-search-input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.pyq-search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.pyq-search-input::placeholder {
+    color: #94a3b8;
+}
+
+.pyq-clear-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e2e8f0;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: #475569;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pyq-clear-btn:hover {
+    background: #cbd5e1;
+    color: #0f172a;
+}
+
+.pyq-search-btn {
+    height: 46px;
+    padding: 0 1.5rem;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+
+.pyq-search-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.pyq-counter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+    white-space: nowrap;
+}
+
+.pyq-counter-number {
+    color: #2563eb;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+/* Breadcrumbs Navigation */
+.pyq-breadcrumbs-nav {
+    margin-bottom: 2rem;
+}
+
+.pyq-breadcrumbs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.pyq-breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.pyq-breadcrumb-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 600;
+    color: #2563eb;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.pyq-breadcrumb-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.pyq-breadcrumb-sep {
+    color: #94a3b8;
+    user-select: none;
+    font-size: 0.85rem;
+}
+
+.pyq-breadcrumb-current {
+    color: #475569;
+    font-weight: 600;
+}
+
+/* Section Header Navigation */
+.pyq-section-header-nav {
+    margin-bottom: 1.25rem;
+}
+
+.pyq-back-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.pyq-back-nav-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    color: #0f172a;
+    transform: translateX(-2px);
+}
+
+/* Examination Card */
+.pyq-exams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.pyq-exam-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pyq-exam-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+}
+
+.pyq-exam-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.pyq-exam-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pyq-exam-title-wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.pyq-exam-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.pyq-exam-meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.pyq-exam-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.pyq-exam-pill-papers {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.pyq-exam-pill-years {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+/* Year Cards Grid */
+.pyq-years-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.pyq-year-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pyq-year-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
+}
+
+.pyq-year-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.pyq-year-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0;
+}
+
+.pyq-year-count-badge {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+}
+
+/* Sections */
+.pyq-section {
+    margin-bottom: 3rem;
+}
+
+.pyq-section-title-wrap {
+    margin-bottom: 1.5rem;
+}
+
+.pyq-section-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.015em;
+}
+
+.pyq-section-note {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Cards Grid */
+.pyq-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Paper Card */
+.pyq-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+}
+
+.pyq-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+}
+
+.pyq-card-header {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.pyq-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pyq-card-title-wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.pyq-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.pyq-card-exam-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 6px;
+    background: #e0e7ff;
+    color: #3730a3;
+    letter-spacing: 0.04em;
+}
+
+.pyq-card-year-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    letter-spacing: 0.03em;
+}
+
+.pyq-card-shift-badge {
+    display: inline-block;
+    padding: 0.25rem 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+}
+
+.pyq-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.pyq-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.pyq-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pyq-meta-item svg {
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+/* Card Actions */
+.pyq-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.pyq-btn {
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 1rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.pyq-btn-primary {
+    flex: 1;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+}
+
+.pyq-btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.pyq-btn-secondary {
+    flex: 1;
+    background: #ffffff;
+    color: #1e293b;
+    border: 1.5px solid #cbd5e1;
+}
+
+.pyq-btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+/* Year Group in Search Results */
+.pyq-year-group {
+    margin-bottom: 2rem;
+}
+
+.pyq-year-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.pyq-year-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 6px;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+/* Load More Pagination */
+.pyq-load-more-wrap {
+    text-align: center;
+    margin: 2.5rem 0 1.5rem 0;
+}
+
+.pyq-load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.75rem 2rem;
+    background: #ffffff;
+    color: #2563eb;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.pyq-load-more-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    transform: translateY(-1px);
+}
+
+.pyq-load-more-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Empty, Loading & Error State Boxes */
+.pyq-state-box {
+    background: #ffffff;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.pyq-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #64748b;
+    margin: 0 auto 1rem;
+}
+
+.pyq-state-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.4rem 0;
+}
+
+.pyq-state-desc {
+    color: #64748b;
+    max-width: 480px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.pyq-retry-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.25rem;
+    padding: 0.65rem 1.5rem;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.pyq-retry-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Loading Spinner */
+.pyq-spinner {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: pyqSpin 0.8s linear infinite;
+}
+
+@keyframes pyqSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* PDF Viewer Modal (Shared Canvas Viewer) */
+.pdf-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    background: #0f172a;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.pdf-viewer.hidden,
+#paperViewer.hidden {
+    display: none !important;
+}
+
+.pdf-viewer-header {
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    padding: 0 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.pdf-viewer-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f8fafc;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 40%;
+}
+
+.pdf-icon {
+    color: #60a5fa;
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.pdf-zoom-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 3px 6px;
+}
+
+.zoom-btn,
+.zoom-level-btn,
+.zoom-fit-btn {
+    background: transparent;
+    border: none;
+    color: #f8fafc;
+    font-size: 0.825rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.zoom-btn:hover,
+.zoom-level-btn:hover,
+.zoom-fit-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+.zoom-fit-btn.active {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.zoom-level-btn {
+    color: #60a5fa;
+    min-width: 44px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.zoom-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: transparent !important;
+}
+
+.viewer-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #f8fafc;
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.viewer-close:hover {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.pdf-viewer-body {
+    flex: 1 1 0%;
+    min-height: 0;
+    width: 100%;
+    height: calc(100% - 56px);
+    position: relative;
+    overflow: hidden; /* Do not scroll body; canvas container is the dedicated scroll container */
+    background: #334155;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.pdf-canvas-container {
+    flex: 1 1 0%;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 16px 48px 16px;
+    box-sizing: border-box;
+    background: #334155;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pdf-canvas-container:empty {
+    display: flex;
+}
+
+.pdf-page-wrapper {
+    position: relative;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    margin: 0 auto;
+    flex-shrink: 0;
+    box-sizing: content-box;
+    overflow: hidden;
+    max-width: none;
+}
+
+.pdf-page-canvas {
+    display: block !important;
+    margin: 0 auto !important;
+    background: #ffffff;
+    box-sizing: border-box;
+    max-width: none;
+}
+
+.pdf-page-number {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #94a3b8;
+    padding: 6px 12px;
+    background: #1e293b;
+    border-top: 1px solid #334155;
+}
+
+#pdfFrame.hidden,
+#paperViewer iframe.hidden,
+.pdf-viewer iframe.hidden {
+    display: none !important;
+}
+
+#pdfFrame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.pdf-state-msg {
+    margin: auto;
+    text-align: center;
+    padding: 2rem;
+    color: #f8fafc;
+}
+
+.pdf-state-msg.hidden {
+    display: none !important;
+}
+
+.pdf-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: pyqSpin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+/* Authentication Required Modal */
+.pyq-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.pyq-modal.hidden {
+    display: none !important;
+}
+
+.pyq-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.pyq-modal-content {
+    position: relative;
+    z-index: 2;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 2.25rem 2rem;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
+    box-sizing: border-box;
+}
+
+.pyq-modal-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+}
+
+.pyq-modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+}
+
+.pyq-modal-desc {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0 0 1.5rem 0;
+}
+
+.pyq-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .pyq-library-page {
+        padding: 1.5rem 0 3rem 0;
+    }
+
+    .pyq-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+
+    .pyq-search-container {
+        flex-direction: row;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .pyq-counter-badge {
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .pyq-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .pdf-viewer-header {
+        padding: 0 0.75rem;
+        height: 52px;
+    }
+
+    .pdf-viewer-title {
+        max-width: 35%;
+        font-size: 0.85rem;
+    }
+
+    .pdf-zoom-toolbar {
+        gap: 2px;
+        padding: 2px 4px;
+    }
+
+    .zoom-btn, .zoom-level-btn, .zoom-fit-btn {
+        padding: 3px 6px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pyq-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .pyq-tagline {
+        font-size: 0.95rem;
+    }
+
+    .pyq-search-container {
+        flex-direction: column;
+    }
+
+    .pyq-search-input-wrap {
+        width: 100%;
+    }
+
+    .pyq-search-btn {
+        width: 100%;
+    }
+
+    .pyq-card-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .pyq-btn-primary,
+    .pyq-btn-secondary {
+        width: 100%;
+    }
+
+    .pyq-modal-actions {
+        flex-direction: column;
+    }
+}

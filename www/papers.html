@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>VidyarthiAstra — Papers</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/papers.css">
+    <link rel="stylesheet" href="css/mobile-overrides.css">
+
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skeleton.css">
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <div
+                class="logo"
+                aria-label="VidyarthiAstra logo"
+            ><img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img"></div>
+
+
+            <nav class="nav">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="live-updates.html">
+                    Live Updates
+                </a>
+
+                <a href="study-resources.html">
+                    Study Resources
+                </a>
+
+                <a href="mock-test.html">
+                    Mock Tests
+                </a>
+
+                <a href="ai-chat.html">
+                    AI Assistant
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    id="profileCircle"
+                    class="profile-circle"
+                    style="display:none;"
+                    aria-label="Profile"
+                >
+                    <span id="profileInitial">?</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+        <section class="papers-page">
+
+            <div class="container">
+
+
+                <!-- BACK -->
+
+                <a
+                    href="#"
+                    id="backLink"
+                    class="back-link"
+                >
+                    ← Back to Exam
+                </a>
+
+
+
+                <!-- HEADER -->
+
+                <div class="papers-hero">
+
+                    <div class="papers-icon">
+                        📚
+                    </div>
+
+                    <p class="section-label">
+                        QUESTION PAPERS
+                    </p>
+
+                    <h1 id="papersTitle">
+                        Loading...
+                    </h1>
+
+                    <p id="papersDescription">
+                        Loading question papers...
+                    </p>
+
+                </div>
+
+
+
+                <!-- PAPERS HEADING -->
+
+                <div class="papers-section-top">
+
+                    <div>
+
+                        <h2>
+                            Available Papers
+                        </h2>
+
+                        <p>
+                            Select a paper to view or download
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="paperCount"
+                        class="paper-count"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- PAPER LIST -->
+
+                <div
+                    id="paperList"
+                    class="paper-list"
+                >
+
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Loading papers...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         PDF VIEWER MODAL
+    ====================================================== -->
+
+    <div
+        id="paperViewer"
+        class="pdf-viewer hidden"
+    >
+
+        <div class="pdf-viewer-header">
+
+            <div class="pdf-viewer-title">
+
+                <span class="pdf-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                </span>
+
+                <span id="viewerTitle">
+                    Question Paper
+                </span>
+
+            </div>
+
+            <!-- PDF ZOOM TOOLBAR -->
+            <div class="pdf-zoom-toolbar">
+
+                <button
+                    type="button"
+                    id="pdfZoomOutBtn"
+                    class="zoom-btn"
+                    aria-label="Zoom out"
+                    title="Zoom Out"
+                >−</button>
+
+                <button
+                    type="button"
+                    id="pdfZoomLevelBtn"
+                    class="zoom-level-btn"
+                    aria-label="Reset to 100%"
+                    title="Set to 100%"
+                >100%</button>
+
+                <button
+                    type="button"
+                    id="pdfZoomInBtn"
+                    class="zoom-btn"
+                    aria-label="Zoom in"
+                    title="Zoom In"
+                >+</button>
+
+                <button
+                    type="button"
+                    id="pdfZoomFitBtn"
+                    class="zoom-fit-btn"
+                    aria-label="Fit to width"
+                    title="Fit to Width"
+                >Fit</button>
+
+            </div>
+
+
+            <div class="pdf-viewer-actions">
+
+                <button
+                    type="button"
+                    id="closeViewer"
+                    class="viewer-close"
+                    aria-label="Close PDF"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="pdf-viewer-body" id="pdfViewerBody">
+
+            <!-- LOADING STATE -->
+            <div id="pdfLoading" class="pdf-state-msg">
+                <div class="pdf-spinner"></div>
+                <p>Loading PDF document...</p>
+            </div>
+
+            <!-- ERROR & FALLBACK STATE -->
+            <div id="pdfError" class="pdf-state-msg hidden">
+                <p class="pdf-error-icon">⚠️</p>
+                <h4 id="pdfErrorTitle">Unable to display PDF preview</h4>
+                <p id="pdfErrorDesc">Tap below to retry or view the paper in your browser.</p>
+                <div class="pdf-error-actions">
+                    <button type="button" id="pdfRetryBtn" class="pdf-btn-secondary">
+                        🔄 Retry
+                    </button>
+                    <button type="button" id="pdfFallbackBtn" class="pdf-btn-primary">
+                        Open in Browser
+                    </button>
+                </div>
+            </div>
+
+            <!-- PDF.JS CANVAS CONTAINER -->
+            <div id="pdfCanvasContainer" class="pdf-canvas-container"></div>
+
+            <!-- DESKTOP IFRAME FALLBACK -->
+            <iframe
+                id="pdfFrame"
+                title="Question Paper PDF"
+                src="about:blank"
+                class="hidden"
+            ></iframe>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © <span id="year"></span>
+                VidyarthiAstra. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/auth.js"
+    ></script>
+
+    <script
+        type="module"
+        src="js/header.js"
+    ></script>
+
+    <script src="js/pdf.min.js"></script>
+
+    <script
+        type="module"
+        src="js/papers.js"
+    ></script>
+
+    <script src="js/mobile-app.js"></script>
+
+    <script type="module" src="js/skeleton-manager.js"></script>
+</body>
+
+</html>

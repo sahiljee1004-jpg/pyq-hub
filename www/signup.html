@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>VidyarthiAstra — Sign Up</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-overrides.css">
+
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skeleton.css">
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIGNUP PAGE
+    ====================================================== -->
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+
+            <div
+                class="brand center logo"
+                aria-label="VidyarthiAstra logo"
+            ><img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img"></div>
+
+
+            <!-- HEADING -->
+
+            <p class="eyebrow">
+                CREATE ACCOUNT
+            </p>
+
+            <h1>
+                Sign Up
+            </h1>
+
+            <p class="muted">
+                Create your account to access your profile.
+            </p>
+
+
+            <!-- =================================================
+                 SIGNUP FORM
+            ================================================== -->
+
+            <form id="signupForm">
+
+
+                <!-- NAME -->
+
+                <label>
+
+                    Name
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Enter your name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- EMAIL -->
+
+                <label>
+
+                    Email
+
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- PASSWORD -->
+
+                <label>
+
+                    Password
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <label>
+
+                    Confirm Password
+
+                    <input
+                        type="password"
+                        id="signupConfirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                </label>
+
+
+                <!-- SIGN UP -->
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Create Account
+                </button>
+
+
+            </form>
+
+
+            <!-- =================================================
+                 GOOGLE SIGNUP
+            ================================================== -->
+
+            <button
+                type="button"
+                id="googleSignup"
+                class="google-btn"
+            >
+                Continue with Google
+            </button>
+
+
+            <!-- STATUS -->
+
+            <p
+                id="authStatus"
+                class="status"
+            ></p>
+
+
+            <!-- LOGIN -->
+
+            <p class="auth-switch">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </p>
+
+
+            <!-- HOME -->
+
+            <p class="auth-switch">
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/auth.js"
+    ></script>
+
+    <script src="js/mobile-app.js"></script>
+
+    <script type="module" src="js/skeleton-manager.js"></script>
+</body>
+
+</html>

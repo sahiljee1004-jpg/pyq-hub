@@ -1,0 +1,54 @@
+# Environment variables & Credentials
+.env
+.env.local
+.env.*.local
+serviceAccountKey*.json
+*.serviceAccountKey.json
+
+# Dependencies
+node_modules/
+
+# Android build outputs & local properties
+android/app/build/
+android/.gradle/
+android/build/
+android/captures/
+android/local.properties
+*.apk
+*.aab
+*.jks
+*.keystore
+google-services.json
+
+# Audit & Scratch files
+audit_*.json
+scratch/
+uploads/
+*.zip
+
+# Screenshots & acceptance artifacts
+*_acceptance_screenshots/
+*_quota_recovery_screenshots/
+*_route_screenshots/
+*_screenshots/
+tests/evidence/
+*.traineddata
+
+# Test and audit outputs
+phase_*_*.json
+ssc_cgl_*.json
+skeleton_*.json
+student_route_*.json
+unresolved_*.json
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+/PYQS website/
+
+firebase-debug.log
+firestore-debug.log
+

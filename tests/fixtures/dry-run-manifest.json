@@ -1,0 +1,180 @@
+{
+  "dryRunTimestamp": "2026-11-10T11:44:47.333Z",
+  "isDryRun": true,
+  "totalWritesPerformed": 0,
+  "summary": {
+    "totalScanned": 21,
+    "eligible": 13,
+    "alreadyMigrated": 1,
+    "skippedActive": 1,
+    "quarantined": 7,
+    "scoreDiscrepanciesDetected": 0
+  },
+  "quarantineBreakdown": {
+    "UNSUPPORTED_PROFILE": 2,
+    "ORPHANED_ATTEMPT": 1,
+    "ORPHANED_RESULT": 1,
+    "DUPLICATE_RESULT": 1,
+    "CORRUPTED_METADATA": 1,
+    "SCORE_INTEGRITY_MISMATCH": 1,
+    "UNRESOLVED_SECTION_ATTRIBUTION": 0
+  },
+  "profileDistribution": {
+    "upsc-prelims-2024": 1,
+    "upsc-prelims-2026": 1,
+    "bpsc-69th-2023": 1,
+    "jee-main-2024": 1,
+    "jee-main-2026": 1,
+    "neet-ug-2024": 1,
+    "gate-cs-2024": 1,
+    "ssc-cgl-2024": 1,
+    "banking-ibps-po-2024": 1,
+    "jee-advanced-2024": 1,
+    "cuet-ug-2024": 1,
+    "university-semester-default": 2
+  },
+  "samples": [
+    {
+      "attemptId": "att_hist_valid_01",
+      "profileId": "upsc-prelims-2024",
+      "before": {
+        "attemptSchema": 1,
+        "totalScore": 3.3333,
+        "correctCount": 2
+      },
+      "after": {
+        "attemptSchema": 2,
+        "totalScore": 3.3333,
+        "correctCount": 2,
+        "isFinalized": true,
+        "requiresManualEvaluation": false,
+        "pendingReviewCount": 0,
+        "sectionScores": {
+          "general_studies": 3.3333
+        },
+        "migratedAt": "2026-11-10T11:44:47.334Z"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_02",
+      "profileId": "upsc-prelims-2026",
+      "before": {
+        "attemptSchema": 1,
+        "totalScore": 3.3333,
+        "correctCount": 2
+      },
+      "after": {
+        "attemptSchema": 2,
+        "totalScore": 3.3333,
+        "correctCount": 2,
+        "isFinalized": true,
+        "requiresManualEvaluation": false,
+        "pendingReviewCount": 0,
+        "sectionScores": {
+          "general_studies": 3.3333
+        },
+        "migratedAt": "2026-11-10T11:44:47.334Z"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_03",
+      "profileId": "bpsc-69th-2023",
+      "before": {
+        "attemptSchema": 1,
+        "totalScore": 1.6667,
+        "correctCount": 2
+      },
+      "after": {
+        "attemptSchema": 2,
+        "totalScore": 1.6667,
+        "correctCount": 2,
+        "isFinalized": true,
+        "requiresManualEvaluation": false,
+        "pendingReviewCount": 0,
+        "sectionScores": {
+          "general_studies": 1.6667
+        },
+        "migratedAt": "2026-11-10T11:44:47.334Z"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_04",
+      "profileId": "jee-main-2024",
+      "before": {
+        "attemptSchema": 1,
+        "totalScore": 7,
+        "correctCount": 2
+      },
+      "after": {
+        "attemptSchema": 2,
+        "totalScore": 7,
+        "correctCount": 2,
+        "isFinalized": true,
+        "requiresManualEvaluation": false,
+        "pendingReviewCount": 0,
+        "sectionScores": {
+          "math_a": 7
+        },
+        "migratedAt": "2026-11-10T11:44:47.334Z"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_05",
+      "profileId": "jee-main-2026",
+      "before": {
+        "attemptSchema": 1,
+        "totalScore": 7,
+        "correctCount": 2
+      },
+      "after": {
+        "attemptSchema": 2,
+        "totalScore": 7,
+        "correctCount": 2,
+        "isFinalized": true,
+        "requiresManualEvaluation": false,
+        "pendingReviewCount": 0,
+        "sectionScores": {
+          "math_a": 7
+        },
+        "migratedAt": "2026-11-10T11:44:47.334Z"
+      }
+    }
+  ],
+  "quarantinedItems": [
+    {
+      "attemptId": "att_hist_unsupported_profile_01",
+      "reason": "UNSUPPORTED_PROFILE",
+      "details": "No registered exam profile matches examId 'gre-general' and year '2024'"
+    },
+    {
+      "attemptId": "att_hist_unsupported_year_01",
+      "reason": "UNSUPPORTED_PROFILE",
+      "details": "No registered exam profile matches examId 'jee-main' and year '2010'"
+    },
+    {
+      "attemptId": "att_hist_corrupted_meta_01",
+      "reason": "CORRUPTED_METADATA",
+      "details": "Missing mandatory identity fields (attemptId: att_hist_corrupted_meta_01, testId: test_jee_2024, userId: undefined)"
+    },
+    {
+      "attemptId": "att_hist_orphaned_attempt_01",
+      "reason": "ORPHANED_ATTEMPT",
+      "details": "Attempt att_hist_orphaned_attempt_01 is marked 'submitted' but has no mockResults document"
+    },
+    {
+      "attemptId": "att_hist_duplicate_result_01",
+      "reason": "DUPLICATE_RESULT",
+      "details": "Multiple (2) mockResults found for attemptId att_hist_duplicate_result_01"
+    },
+    {
+      "attemptId": "att_hist_score_mismatch_01",
+      "reason": "SCORE_INTEGRITY_MISMATCH",
+      "details": "Recorded totalScore (999) deviates from breakdown sum (4.0000) by 995.0000"
+    },
+    {
+      "attemptId": "att_non_existent_orphan_01",
+      "reason": "ORPHANED_RESULT",
+      "details": "mockResults res_hist_orphaned_result_01 has no corresponding attempt in mockAttempts"
+    }
+  ]
+}

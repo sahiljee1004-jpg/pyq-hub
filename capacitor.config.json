@@ -1,0 +1,20 @@
+{
+  "appId": "com.pyqs.website",
+  "appName": "VidyarthiVerse",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "plugins": {
+    "Keyboard": {
+      "resize": "body",
+      "style": "DARK",
+      "resizeOnFullScreen": true
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#172554"
+    }
+  }
+}

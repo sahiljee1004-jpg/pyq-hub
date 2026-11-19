@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "pyqs-hub-43bed",
+    "production": "pyqs-hub-43bed",
+    "staging": "staging-vidyarthiastra"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "jee-main": {
+    "2025": {
+      "23 Jan 2025 Shift 2": {
+        "13": {
+          "questionNumber": 13,
+          "questionText": "A particle of mass m = 2 kg is moving under the action of a central force F(r) = -k/r^2. If the angular momentum L is 4 kg m^2/s and k = 10 N m^2, calculate the radius of the circular orbit.",
+          "options": [
+            "(A) 0.8 m",
+            "(B) 1.2 m",
+            "(C) 1.6 m",
+            "(D) 2.0 m"
+          ],
+          "subject": "Physics",
+          "topic": "Gravitation & Central Forces",
+          "questionType": "mcq",
+          "pageNumber": 4,
+          "extractionStatus": "success"
+        },
+        "14": {
+          "questionNumber": 14,
+          "questionText": "Which of the following compounds exhibits optical isomerism?",
+          "options": [
+            "(A) [Co(NH3)6]3+",
+            "(B) [Co(en)3]3+",
+            "(C) cis-[Pt(NH3)2Cl2]",
+            "(D) trans-[Pt(NH3)2Cl2]"
+          ],
+          "subject": "Chemistry",
+          "topic": "Coordination Compounds",
+          "questionType": "mcq",
+          "pageNumber": 5,
+          "extractionStatus": "success"
+        }
+      },
+      "23 Jan 2025 Shift 1": {
+        "13": {
+          "questionNumber": 13,
+          "questionText": "Two ideal diodes are connected in parallel with opposite polarities to an AC supply of 220 V. Calculate the peak current flowing through the circuit if resistor R = 100 ohms.",
+          "options": [
+            "(A) 1.55 A",
+            "(B) 3.11 A",
+            "(C) 2.20 A",
+            "(D) 4.40 A"
+          ],
+          "subject": "Physics",
+          "topic": "Semiconductors & Diodes",
+          "questionType": "mcq",
+          "pageNumber": 3,
+          "extractionStatus": "success"
+        }
+      }
+    }
+  },
+  "Gate": {
+    "2025": {
+      "Gate CS-1": {
+        "21": {
+          "questionNumber": 21,
+          "questionText": "Consider a hash table with 10 slots and collisions resolved using open addressing with linear probing. The hash function is h(k) = k mod 10. Keys inserted in order are 42, 23, 34, 52, 46. What is the slot number of key 46?",
+          "options": [
+            "(A) 6",
+            "(B) 5",
+            "(C) 7",
+            "(D) 4"
+          ],
+          "subject": "Computer Science",
+          "topic": "Data Structures & Hashing",
+          "questionType": "mcq",
+          "pageNumber": 7,
+          "extractionStatus": "success"
+        }
+      }
+    }
+  }
+}

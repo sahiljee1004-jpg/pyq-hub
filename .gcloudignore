@@ -1,0 +1,19 @@
+# gcloud deployment ignore file
+.gcloudignore
+.git
+.gitignore
+
+# Credentials & secrets
+serviceAccountKey*.json
+*.serviceAccountKey.json
+.env
+.env.*
+
+# Local artifacts, logs, tests & scratch
+scratch/
+tests/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+node_modules/
+

@@ -1,0 +1,231 @@
+/* ============================================================
+   VIDYARTHIVERSE — STUDY RESOURCES STYLES
+   ============================================================ */
+
+.study-resources-page {
+    padding: 32px 0 60px;
+    background: #f8fafc;
+    min-height: calc(100vh - 140px);
+}
+
+.study-nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.study-breadcrumb-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.study-hero {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.study-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.study-hero h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #17213d;
+    margin: 4px 0 8px;
+}
+
+.study-hero p {
+    color: #64748b;
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0;
+}
+
+.study-section-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.study-section-top h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #17213d;
+    margin: 0 0 4px;
+}
+
+.study-section-top p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.study-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 8px;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: #2457e6;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.study-back-btn:hover {
+    color: #173fb5;
+}
+
+#backBtn.hidden {
+    display: none !important;
+}
+
+/* Exam Grid & Cards */
+.study-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.study-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+}
+
+.study-card:hover {
+    transform: translateY(-2px);
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.study-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #2457e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.study-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #17213d;
+    margin: 0 0 4px;
+}
+
+.study-card-meta {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Notes List (Reusing Paper Card Styling) */
+.study-notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.study-admin-tools,
+.study-admin-form {
+    background: #fff;
+    border: 1px solid #d7e0e8;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0 0 20px;
+}
+
+.study-admin-tools.hidden {
+    display: none;
+}
+
+.study-admin-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.study-admin-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    align-items: end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.study-admin-form h3 {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: #17213d;
+    font-size: 16px;
+}
+
+.study-admin-form label {
+    display: grid;
+    gap: 6px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.study-admin-form input:not([type="checkbox"]) {
+    min-width: 0;
+    width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 8px 10px;
+    color: #17213d;
+}
+
+.study-admin-form .study-admin-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+}
+
+.study-admin-form button {
+    min-height: 40px;
+}
+
+@media (max-width: 640px) {
+    .study-hero {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+    .study-hero h1 {
+        font-size: 22px;
+    }
+    .study-grid {
+        grid-template-columns: 1fr;
+    }
+}

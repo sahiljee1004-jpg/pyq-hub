@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VidyarthiAstra — Online Mock Test Engine</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mock-test.css">
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skeleton.css">
+</head>
+<body>
+
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo" aria-label="VidyarthiAstra logo">
+                <img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img">
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="live-updates.html">Live Updates</a>
+                <a href="study-resources.html">Study Resources</a>
+                <a href="mock-test.html" class="active">Mock Tests</a>
+                <a href="ai-chat.html">AI Assistant</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mock-container">
+
+        <!-- 1. CATALOG VIEW: Available Published Mock Tests -->
+        <section id="catalogView">
+            <div class="mock-header-banner">
+                <h1>Online Mock Test Series</h1>
+                <p>Real-time competitive exam simulation with official NTA marking scheme, countdown timer, and comprehensive performance analytics.</p>
+            </div>
+
+            <!-- SEARCH & YEAR SORTING TOOLBAR -->
+            <div class="mock-catalog-toolbar" id="catalogToolbar" style="display: none;">
+                <div class="mock-search-wrapper">
+                    <svg class="mock-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input 
+                        type="search" 
+                        id="mockSearchInput" 
+                        class="mock-search-input" 
+                        placeholder="Search by exam (e.g. JEE Main, NEET), year, shift, paper code..." 
+                        aria-label="Search mock tests by examination, year, shift or paper code"
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+                    <button 
+                        type="button" 
+                        id="mockSearchClearBtn" 
+                        class="mock-search-clear-btn" 
+                        title="Clear search query (Esc)" 
+                        aria-label="Clear search" 
+                        style="display: none;"
+                    >&times;</button>
+                </div>
+
+                <div class="mock-sort-wrapper">
+                    <label for="mockYearSortSelect" class="mock-sort-label">Sort by Year:</label>
+                    <select id="mockYearSortSelect" class="mock-sort-select" aria-label="Sort mock tests by examination year">
+                        <option value="default" selected>Default (Newest First)</option>
+                        <option value="asc">Ascending Year</option>
+                        <option value="desc">Descending Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- RESULTS COUNT & STATUS BAR -->
+            <div class="mock-catalog-stats-bar" id="mockCatalogStatsBar" style="display: none;">
+                <span id="mockResultsCount" class="mock-results-count">Showing 0 mock tests</span>
+                <button type="button" id="mockResetFiltersBtn" class="mock-reset-filters-btn" style="display: none;">Reset Filters</button>
+            </div>
+
+            <div id="catalogLoading" style="text-align: center; padding: 3rem; color: #64748b;">
+                Loading available mock test papers...
+            </div>
+
+            <div id="catalogEmpty" style="display: none; text-align: center; padding: 4rem 1rem; color: #64748b;">
+                <p style="font-size: 1.1rem; font-weight: 600;">No published mock tests currently available.</p>
+                <p style="margin-top: 0.5rem;">New test papers are added periodically by administrators. Check back soon!</p>
+            </div>
+
+            <!-- SEARCH NO-RESULTS EMPTY STATE -->
+            <div id="catalogNoResults" class="mock-no-results-card" style="display: none;">
+                <div class="mock-no-results-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </div>
+                <h3>No Matching Mock Tests Found</h3>
+                <p id="mockNoResultsText">We couldn't find any test papers matching your query. Try searching for broader terms like "JEE Main", "NEET", or a specific year.</p>
+                <div style="margin-top: 1.25rem;">
+                    <button type="button" id="btnClearSearchNoResults" class="btn-clear-search-action">Clear Search & View All</button>
+                </div>
+            </div>
+
+            <div id="testGrid" class="mock-grid" style="display: none;"></div>
+        </section>
+
+        <!-- 2. ACTIVE TEST ENGINE VIEW: Live Test Interface -->
+        <section id="testView" style="display: none;">
+            <!-- Top Status Bar -->
+            <div class="test-top-bar">
+                <div class="test-title-info">
+                    <h2 id="activeTestTitle">Exam Title</h2>
+                    <span id="activeTestMeta" style="font-size: 0.85rem; color: #64748b;">NEET UG | Code Q1</span>
+                </div>
+                <div class="test-timer-wrapper">
+                    <div id="timerDisplay" class="test-timer-pill">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span id="timerText">00:00:00</span>
+                    </div>
+                    <button id="btnTopSubmit" class="btn-submit-test">Submit Test</button>
+                </div>
+            </div>
+
+            <!-- Section Navigation Bar -->
+            <div id="sectionTabsBar" class="section-tabs-bar" style="display: none; margin-bottom: 1rem; overflow-x: auto; white-space: nowrap; gap: 0.5rem; padding: 4px 0;"></div>
+
+            <!-- Two-column Test Session Layout -->
+            <div class="test-session-layout">
+                <!-- Left: Question & Answers -->
+                <div class="test-main-col">
+                    <div class="test-question-card">
+                        <div class="q-header">
+                            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                                <span id="qNumberBadge" class="q-badge">Question 1 of 180</span>
+                                <span id="qSectionBadge" class="q-badge" style="background: #f1f5f9; color: #334155; display: none;">Section A</span>
+                                <span id="qSubjectBadge" class="q-badge" style="background: #e0f2fe; color: #0369a1;">Physics</span>
+                                <span id="qTypeBadge" class="q-badge" style="background: #fdf4ff; color: #9333ea; font-size: 0.78rem;">MCQ</span>
+                            </div>
+                            <div id="qMarksInfo" class="q-marks-info">+4 / -1 Marks</div>
+                        </div>
+
+                        <!-- Reading Comprehension / Passage Box -->
+                        <div id="qPassageBox" class="passage-box" style="display: none; margin-bottom: 1rem; padding: 1rem 1.25rem; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; line-height: 1.6; color: #334155;"></div>
+
+                        <!-- Main Question Stem -->
+                        <div id="qText" class="q-text">Loading question text...</div>
+
+                        <!-- Statements / Assertion-Reason Box -->
+                        <div id="qStatementsBox" class="statements-box" style="display: none; margin-bottom: 1rem; padding: 0.75rem 1rem; background: #f1f5f9; border-left: 4px solid #3b82f6; border-radius: 4px; font-size: 0.95rem; line-height: 1.6; color: #1e293b;"></div>
+
+                        <!-- Tables / Matching Pair Box -->
+                        <div id="qTablesBox" class="tables-box" style="display: none; margin-bottom: 1rem; overflow-x: auto;"></div>
+
+                        <!-- Dynamic Options & Inputs Container -->
+                        <div id="optionsContainer" class="options-list"></div>
+
+                        <div class="test-actions-bar">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button id="btnClearChoice" class="btn-secondary">Clear Response</button>
+                                <button id="btnMarkReview" class="btn-review">Mark for Review</button>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button id="btnPrev" class="btn-secondary">Previous</button>
+                                <button id="btnNext" class="btn-primary">Save & Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Question Palette -->
+                <div class="test-sidebar-col">
+                    <div class="palette-card">
+                        <h3>Question Palette</h3>
+                        <div id="paletteGrid" class="palette-grid"></div>
+
+                        <div class="palette-legend">
+                            <div class="legend-item"><span class="legend-dot" style="background: #22c55e;"></span> Answered</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #ef4444;"></span> Not Answered</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #a855f7;"></span> Marked for Review</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #f8fafc; border: 1px solid #cbd5e1;"></span> Not Visited</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. RESULT VIEW: Comprehensive Academic Performance Analysis -->
+        <section id="resultView" style="display: none;">
+            <div class="result-dashboard">
+                <div class="result-header">
+                    <h2>Performance Analysis</h2>
+                    <p style="color: #64748b; margin-top: 0.35rem;">Detailed breakdown of your examination attempt and subject-wise score distribution.</p>
+                </div>
+
+                <!-- Evaluation in Progress Notice (for Descriptive Questions) -->
+                <div id="resPendingReviewBanner" style="display: none; background: #eff6ff; border: 1.5px solid #93c5fd; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; color: #1e40af;">
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <div>
+                            <h4 style="margin: 0 0 0.35rem 0; font-size: 1.05rem; font-weight: 700; color: #1e3a8a;">Subjective Evaluation in Progress</h4>
+                            <p style="margin: 0; font-size: 0.9rem; line-height: 1.5; color: #3b82f6;">
+                                Objective questions (MCQ, MSQ, NAT) are evaluated instantly. Your test submission contains descriptive / manual questions that require instructor grading. Your overall score will be updated upon final verification.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overall Summary Card -->
+                <div class="result-overview-card">
+                    <div class="result-overview-left">
+                        <div class="score-circle">
+                            <span id="resTotalScore" class="score-number">0</span>
+                            <span id="resMaxScore" class="score-max">out of 300</span>
+                        </div>
+                        <div class="score-percentage-pill">
+                            <span id="resPercentage" style="font-weight: 700; color: #1e3a8a;">0%</span>
+                            <span style="font-size: 0.78rem; color: #64748b; margin-left: 4px;">Score</span>
+                        </div>
+                    </div>
+
+                    <div class="result-overview-right">
+                        <div class="result-stats-grid">
+                            <div class="result-stat-box">
+                                <div id="resAccuracy" class="stat-val" style="color: #2563eb;">0%</div>
+                                <div class="stat-lbl">Overall Accuracy</div>
+                            </div>
+                            <div class="result-stat-box">
+                                <div id="resTotalQuestions" class="stat-val" style="color: #0f172a;">0</div>
+                                <div class="stat-lbl">Total Questions</div>
+                            </div>
+                            <div class="result-stat-box">
+                                <div id="resCorrect" class="stat-val" style="color: #16a34a;">0</div>
+                                <div class="stat-lbl">Correct Answers</div>
+                            </div>
+                            <div class="result-stat-box">
+                                <div id="resIncorrect" class="stat-val" style="color: #dc2626;">0</div>
+                                <div class="stat-lbl">Incorrect Answers</div>
+                            </div>
+                            <div class="result-stat-box">
+                                <div id="resUnanswered" class="stat-val" style="color: #64748b;">0</div>
+                                <div class="stat-lbl">Unattempted</div>
+                            </div>
+                            <div class="result-stat-box" id="resDroppedBox" style="display: none;">
+                                <div id="resDropped" class="stat-val" style="color: #d97706;">0</div>
+                                <div class="stat-lbl">Dropped (Bonus)</div>
+                            </div>
+                            <div class="result-stat-box">
+                                <div id="resTimeTaken" class="stat-val" style="color: #475569; font-size: 1.25rem;">-</div>
+                                <div class="stat-lbl">Time Taken</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legacy Notice Warning if applicable -->
+                <div id="resLegacyNotice" style="display: none; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 2rem; color: #92400e; font-size: 0.9rem;">
+                    <strong>Notice:</strong> <span id="resLegacyNoticeText">This test was completed under an earlier version. Subject-wise analysis is estimated based on available record data.</span>
+                </div>
+
+                <!-- Subject-wise Score Cards -->
+                <div class="analysis-section">
+                    <div class="section-title-wrapper">
+                        <h3 class="analysis-section-title">Subject-wise Score Cards</h3>
+                        <span class="section-subtitle">Performance breakdown by individual academic discipline</span>
+                    </div>
+                    <div id="subjectCardsGrid" class="subject-cards-grid">
+                        <!-- Injected dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- Section-wise Score Cards -->
+                <div id="sectionAnalysisSection" class="analysis-section" style="display: none; margin-top: 2.5rem;">
+                    <div class="section-title-wrapper">
+                        <h3 class="analysis-section-title">Section-wise Performance Breakdown</h3>
+                        <span class="section-subtitle">Performance breakdown across individual examination sections and scoring rules</span>
+                    </div>
+                    <div id="sectionCardsGrid" class="subject-cards-grid">
+                        <!-- Injected dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- Subject-wise Performance Chart -->
+                <div class="analysis-section" style="margin-top: 2.5rem;">
+                    <div class="section-title-wrapper">
+                        <h3 class="analysis-section-title">Subject-wise Performance Chart</h3>
+                        <span class="section-subtitle">Comparison of marks obtained across subjects relative to maximum marks</span>
+                    </div>
+                    <div class="chart-container-card">
+                        <div id="subjectPerformanceChart" class="chart-wrapper"></div>
+                    </div>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="result-actions-bar">
+                    <button id="btnReviewExam" class="btn-primary" style="padding: 0.85rem 2.25rem; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        Review Exam
+                    </button>
+                    <button id="btnReturnCatalog" class="btn-secondary" style="padding: 0.85rem 1.75rem; font-size: 1rem;">Back to Test Series</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. REVIEW EXAM VIEW: Student Paper Review Mode -->
+        <section id="reviewView" style="display: none;">
+            <!-- Review Top Bar -->
+            <div class="review-top-bar">
+                <div class="review-title-info">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <h2 id="reviewExamTitle" style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin: 0;">Exam Review</h2>
+                        <span class="review-mode-tag">Review Mode</span>
+                    </div>
+                    <div class="review-summary-pills">
+                        <span class="review-pill">Total: <strong id="revSummaryTotal">0</strong></span>
+                        <span class="review-pill correct">Correct: <strong id="revSummaryCorrect">0</strong></span>
+                        <span class="review-pill incorrect">Incorrect: <strong id="revSummaryIncorrect">0</strong></span>
+                        <span class="review-pill unattempted">Unattempted: <strong id="revSummaryUnattempted">0</strong></span>
+                        <span class="review-pill dropped" id="revSummaryDroppedPill" style="display: none;">Dropped: <strong id="revSummaryDropped">0</strong></span>
+                    </div>
+                </div>
+                <div class="review-top-actions">
+                    <button id="btnBackToAnalysis" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        Back to Analysis
+                    </button>
+                    <button id="btnExitReview" class="btn-secondary">Exit</button>
+                </div>
+            </div>
+
+            <!-- Review Filter Controls -->
+            <div class="review-filter-bar">
+                <div class="review-filter-group">
+                    <span class="review-filter-label">Filter by Subject:</span>
+                    <div id="reviewSubjectFilters" class="review-filter-pills">
+                        <!-- Dynamically injected pills (All + subjects) -->
+                    </div>
+                </div>
+                <div class="review-filter-group">
+                    <span class="review-filter-label">Filter by Status:</span>
+                    <div id="reviewStatusFilters" class="review-filter-pills">
+                        <button type="button" class="filter-btn active" data-status="all">All</button>
+                        <button type="button" class="filter-btn correct" data-status="correct">Correct</button>
+                        <button type="button" class="filter-btn incorrect" data-status="incorrect">Incorrect</button>
+                        <button type="button" class="filter-btn unattempted" data-status="unattempted">Unattempted</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Two-Column Layout -->
+            <div class="test-session-layout">
+                <!-- Left: Question & Answers Review Card -->
+                <div class="test-main-col">
+                    <div class="test-question-card review-question-card">
+                        <div class="q-header">
+                            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                <span id="revQNumberBadge" class="q-badge">Question 1 of 75</span>
+                                <span id="revQSubjectBadge" class="q-badge" style="background: #e0f2fe; color: #0369a1;">Physics</span>
+                                <span id="revQStatusBadge" class="q-badge">Correct</span>
+                            </div>
+                            <div id="revQMarksBadge" class="q-marks-info">+4 Marks</div>
+                        </div>
+
+                        <div id="revQText" class="q-text">Loading question text...</div>
+
+                        <div id="revDiagramBox" style="display: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.85rem; margin-bottom: 1.25rem; font-size: 0.85rem; color: #475569;">
+                            <strong>Source Reference:</strong> Diagram / Figure referenced in source paper (Page <span id="revSourcePageNum">1</span>).
+                        </div>
+
+                        <!-- Options List -->
+                        <div id="revOptionsContainer" class="options-list review-options-list"></div>
+
+                        <!-- Numerical Student Answer Display -->
+                        <div id="revNumericalDisplay" style="display: none; margin-bottom: 1.5rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+                            <div style="font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 0.4rem;">Student's Submitted Response:</div>
+                            <div id="revNumericalValue" style="font-size: 1.2rem; font-weight: 700; color: #0f172a;">None</div>
+                        </div>
+
+                        <!-- Dropped Question Notice Box -->
+                        <div id="revDroppedBox" style="display: none; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; color: #92400e; font-size: 0.9rem;">
+                            <strong>Official Decision:</strong> This question was officially dropped or excluded. Full bonus marks have been awarded to all candidates according to official exam policy.
+                        </div>
+
+                        <!-- Correct Answer Box (ONLY SHOWN FOR INCORRECT QUESTIONS) -->
+                        <div id="revCorrectAnswerBox" class="rev-correct-box" style="display: none;">
+                            <div class="rev-correct-heading">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Correct Answer:</span>
+                            </div>
+                            <div id="revCorrectAnswerText" class="rev-correct-text">Option C: Carbon dioxide</div>
+                        </div>
+
+                        <!-- Review Navigation Buttons -->
+                        <div class="test-actions-bar">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button id="btnRevPrev" class="btn-secondary">Previous Question</button>
+                                <button id="btnRevNext" class="btn-primary">Next Question</button>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span id="revCurrentStatusIndicator" style="font-size: 0.85rem; color: #64748b;">Question 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Question Palette -->
+                <div class="test-sidebar-col">
+                    <div class="palette-card">
+                        <h3>Question Palette</h3>
+                        <div id="revPaletteGrid" class="palette-grid"></div>
+
+                        <div class="palette-legend">
+                            <div class="legend-item"><span class="legend-dot" style="background: #16a34a;"></span> Correct</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #dc2626;"></span> Incorrect</div>
+                            <div class="legend-item"><span class="legend-dot" style="background: #94a3b8;"></span> Unattempted</div>
+                            <div class="legend-item" id="revLegendDropped" style="display: none;"><span class="legend-dot" style="background: #d97706;"></span> Dropped (Bonus)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Language Selection Modal (Student Pre-Test Step) -->
+    <div id="languageModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Choose your test language</h3>
+            <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.5;">
+                Select your preferred medium for attempting this mock examination. All questions, options, and instructions will be presented in your chosen language.
+            </p>
+
+            <div style="margin-bottom: 1.25rem;">
+                <label style="font-size: 0.85rem; font-weight: 700; color: #334155; display: block; margin-bottom: 0.5rem;">Available Languages for this Paper:</label>
+                <div id="languageOptionsContainer" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <!-- Injected dynamically based on test.availableLanguages -->
+                </div>
+            </div>
+
+            <div id="languageNoticeBox" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #475569; line-height: 1.4;">
+                <div style="font-weight: 600; color: #1e293b; margin-bottom: 0.25rem;">Translation Integrity Policy</div>
+                Where verified translations are not yet available for specific questions, the official canonical English version will be provided to ensure complete scientific and mathematical accuracy.
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                <button id="langModalBtnCancel" class="btn-secondary">Cancel</button>
+                <button id="langModalBtnConfirm" class="btn-primary" style="padding: 0.65rem 1.25rem;">Confirm &amp; Start Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Confirmation Modal -->
+    <div id="submitModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Submit Mock Test?</h3>
+            <p style="color: #475569; margin-bottom: 1.5rem; line-height: 1.5;">Are you sure you want to finish and submit your test? You will not be able to change your answers after submission.</p>
+
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="color: #64748b;">Total Answered:</span>
+                    <strong id="modalAnsweredCount" style="color: #16a34a;">0</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="color: #64748b;">Marked for Review:</span>
+                    <strong id="modalReviewCount" style="color: #a855f7;">0</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: #64748b;">Unanswered:</span>
+                    <strong id="modalUnansweredCount" style="color: #dc2626;">0</strong>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                <button id="modalBtnCancel" class="btn-secondary">Resume Test</button>
+                <button id="modalBtnConfirm" class="btn-submit-test">Yes, Submit Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Session Expiry Modal (Auth Interruption Recovery) -->
+    <div id="sessionExpiryModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 480px; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⏱️</div>
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Session Expired</h3>
+            <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.5;">
+                Your authentication session has expired. Your answers up to this point are preserved on the server. Please sign in to resume saving answers and submit your test.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 0.75rem;">
+                <button id="btnResumeSession" class="btn-primary" style="padding: 0.75rem 1.75rem;">Sign In to Resume</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/header.js"></script>
+    <script type="module" src="js/mock-test.js"></script>
+    <script type="module" src="js/skeleton-manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VidyarthiAstra — Admin Dashboard & PYQ Import Pipeline</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/mobile-overrides.css">
+    
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+</head>
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+    <header class="navbar site-header">
+        <a href="index.html" class="logo" aria-label="VidyarthiAstra logo">
+            <img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img">
+        </a>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="live-updates.html">Live Updates</a>
+            <a href="study-resources.html">Study Resources</a>
+            <a href="ai-chat.html">AI Assistant</a>
+            <a href="admin.html" class="active" id="navAdminLink">Admin</a>
+            <a href="login.html" id="authButton" class="auth-button">Login/Sign up</a>
+            <a href="profile.html" id="profileCircle" class="profile-circle" style="display:none;" aria-label="Profile"></a>
+        </nav>
+    </header>
+
+    <!-- =====================================================
+         MAIN ADMIN CONTAINER
+    ====================================================== -->
+    <main class="admin-page">
+        <!-- AUTHENTICATING SKELETON -->
+        <div id="adminAuthLoading" class="admin-card" style="text-align: center; padding: 50px 20px;">
+            <p style="font-size: 16px; color: #686d7c; font-weight: 600;">Verifying administrator authorization...</p>
+        </div>
+
+        <!-- ACCESS DENIED VIEW -->
+        <div id="adminAccessDenied" class="admin-access-denied" style="display: none;">
+            <div style="font-size: 40px; margin-bottom: 12px; color: #ef4444;">&#9888;</div>
+            <h2>Administrator Access Required</h2>
+            <p>You do not have administrative privileges to access the PYQ import pipeline or protected question databases.</p>
+            <div style="display: flex; justify-content: center; gap: 12px;">
+                <button type="button" id="adminLoginBtn" class="admin-btn admin-btn-primary">Sign in as Administrator</button>
+                <a href="index.html" id="deniedBackToWebappBtn" class="admin-btn admin-btn-secondary">&larr; Back to Webapp</a>
+            </div>
+        </div>
+
+        <!-- AUTHENTICATED ADMIN DASHBOARD CONTENT -->
+        <div id="adminDashboardView" style="display: none;">
+            
+            <!-- HEADER ROW -->
+            <div class="admin-header-row">
+                <div class="admin-title-area">
+                    <h1>Admin Dashboard</h1>
+                    <p>Automated Previous-Year Question Paper Import Pipeline & Verification Control</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="admin-role-badge">
+                        <span class="admin-role-dot"></span>
+                        <span id="adminActorLabel">Authorized Admin</span>
+                    </span>
+                    <a href="mock-test.html" id="viewMockTestsNavBtn" class="admin-btn admin-btn-secondary" style="padding: 6px 14px; font-size: 13px; text-decoration: none;">Student Mock Tests</a>
+                    <a href="index.html" id="backToWebappBtn" class="admin-btn admin-btn-secondary" style="padding: 6px 14px; font-size: 13px; text-decoration: none;">&larr; Back to Webapp</a>
+                    <button type="button" id="adminSignOutBtn" class="admin-btn admin-btn-secondary" style="padding: 6px 14px; font-size: 13px;">Sign Out</button>
+                </div>
+            </div>
+
+            <!-- TABS -->
+            <div class="admin-tabs" role="tablist">
+                <button type="button" class="admin-tab-btn active" data-tab="overview">
+                    Overview
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="upload">
+                    Upload PYQ Paper
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="founders">
+                    Founder Profiles
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="history">
+                    Import History
+                    <span class="admin-tab-badge" id="jobsBadge">0</span>
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="users" id="usersTabBtn" style="display: none;">
+                    Admin Users
+                    <span class="admin-tab-badge" id="adminUsersCountBadge">0</span>
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="progress" id="progressTabBtn" style="display: none;">
+                    Processing Job
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="report" id="reportTabBtn" style="display: none;">
+                    Validation Report
+                </button>
+                <button type="button" class="admin-tab-btn" data-tab="review" id="reviewTabBtn" style="display: none;">
+                    Review Questions
+                </button>
+            </div>
+
+            <!-- TAB 1: OVERVIEW -->
+            <section id="tab-overview" class="admin-tab-content active">
+                <div class="admin-metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">TOTAL IMPORTS</span>
+                        <span class="metric-value" id="statTotalImports">0</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">PROCESSING</span>
+                        <span class="metric-value" id="statProcessing">0</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">NEEDS REVIEW</span>
+                        <span class="metric-value review" id="statNeedsReview">0</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">READY TO PUBLISH</span>
+                        <span class="metric-value ready" id="statReady">0</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">PUBLISHED PAPERS</span>
+                        <span class="metric-value ready" id="statPublished">0</span>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Quick Actions</h2>
+                            <p class="admin-card-subtitle">Automated workflows for Previous Year Question papers</p>
+                        </div>
+                        <button type="button" class="admin-btn admin-btn-primary" id="startNewImportBtn">
+                            + Start New Import
+                        </button>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px;">
+                        <h3 style="font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 6px;">Supported Pipeline Workflow: NEET UG 2024</h3>
+                        <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+                            The automated pipeline ingests <strong>Question Paper PDF</strong>, <strong>Official Answer Key PDF</strong>, and <strong>Exam Pattern Document</strong>.
+                            It reconciles booklet codes, checks question counts, verifies official answer keys, validates scoring rules (+4/-1), and keeps answers strictly protected from student views until publication.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- RECENT JOBS TABLE IN OVERVIEW -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h2 class="admin-card-title">Recent Import Jobs</h2>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Job ID</th>
+                                    <th>Exam / Year</th>
+                                    <th>Paper Code</th>
+                                    <th>Status</th>
+                                    <th>Questions</th>
+                                    <th>Answers Matched</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentJobsTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: #94a3b8; padding: 24px;">No import jobs yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: UPLOAD WORKFLOW -->
+            <section id="tab-upload" class="admin-tab-content" style="display: none;">
+                <div class="stepper-nav">
+                    <div class="step-item active" id="step1Indicator">
+                        <span class="step-num">1</span>
+                        <span>Exam Metadata</span>
+                    </div>
+                    <div class="step-item" id="step2Indicator">
+                        <span class="step-num">2</span>
+                        <span>Upload 3 PDFs</span>
+                    </div>
+                    <div class="step-item" id="step3Indicator">
+                        <span class="step-num">3</span>
+                        <span>Automated Pipeline</span>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <h2 class="admin-card-title" style="margin-bottom: 20px;">Step 1 — Exam Selection & Metadata</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="examInput">Target Exam <span style="color:#ef4444;">*</span></label>
+                            <input type="text" id="examInput" name="examName" placeholder="Enter exam name (e.g., NEET UG, JEE Main, GATE)" maxlength="150" autocomplete="off" required style="padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; width: 100%; box-sizing: border-box;">
+                            <span class="form-helper" id="examInputHelper">Enter standard or custom exam name (e.g., NEET UG, JEE Main, GATE)</span>
+                            <div id="examInputError" class="field-error-msg" style="display: none; color: #ef4444; font-size: 12px; margin-top: 4px;"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="yearInput">Examination Year</label>
+                            <input type="number" id="yearInput" value="2024" min="2000" max="2030">
+                        </div>
+                        <div class="form-group">
+                            <label for="paperTypeSelect">Paper Type</label>
+                            <select id="paperTypeSelect">
+                                <option value="pyq" selected>Previous-Year Paper</option>
+                                <option value="official_sample">Official Sample Paper</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h2 class="admin-card-title" style="margin: 30px 0 16px;">Step 2 — Upload Required Source Documents</h2>
+                    <p style="font-size: 14px; color: #64748b; margin-bottom: 20px;">
+                        All 3 source documents are mandatory to ensure authoritative answer key reconciliation and pattern verification.
+                    </p>
+
+                    <div class="upload-dropzone-container">
+                        <!-- DROPZONE A: QUESTION PAPER -->
+                        <div class="dropzone-box" id="dropzoneQp" data-type="questionPaper">
+                            <input type="file" id="fileInputQp" class="hidden-file-input" accept=".pdf,application/pdf">
+                            <div class="dropzone-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            </div>
+                            <div class="dropzone-title">A. Question Paper PDF</div>
+                            <div class="dropzone-desc">Original question booklet PDF</div>
+                            <div class="file-meta-tag" id="qpMetaTag" style="display: none;"></div>
+                            <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px;">
+                                <button type="button" class="admin-btn admin-btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="document.getElementById('fileInputQp').click()">Choose File</button>
+                                <button type="button" class="admin-btn admin-btn-danger remove-file-btn" id="qpRemoveBtn" aria-label="Remove question paper" style="display: none; padding: 6px 12px; font-size: 12px; background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; cursor: pointer;">Remove File</button>
+                            </div>
+                        </div>
+
+                        <!-- DROPZONE B: ANSWER KEY -->
+                        <div class="dropzone-box" id="dropzoneAk" data-type="answerKey">
+                            <input type="file" id="fileInputAk" class="hidden-file-input" accept=".pdf,application/pdf">
+                            <div class="dropzone-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            </div>
+                            <div class="dropzone-title">B. Official Answer Key PDF</div>
+                            <div class="dropzone-desc">NTA official final / revised answer key</div>
+                            <div class="file-meta-tag" id="akMetaTag" style="display: none;"></div>
+                            <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px;">
+                                <button type="button" class="admin-btn admin-btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="document.getElementById('fileInputAk').click()">Choose File</button>
+                                <button type="button" class="admin-btn admin-btn-danger remove-file-btn" id="akRemoveBtn" aria-label="Remove answer key" style="display: none; padding: 6px 12px; font-size: 12px; background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; cursor: pointer;">Remove File</button>
+                            </div>
+                        </div>
+
+                        <!-- DROPZONE C: EXAM PATTERN -->
+                        <div class="dropzone-box" id="dropzoneEp" data-type="examPattern">
+                            <input type="file" id="fileInputEp" class="hidden-file-input" accept=".pdf,application/pdf">
+                            <div class="dropzone-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div class="dropzone-title">C. Official Pattern Document</div>
+                            <div class="dropzone-desc">Information bulletin / pattern scheme</div>
+                            <div class="file-meta-tag" id="epMetaTag" style="display: none;"></div>
+                            <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px;">
+                                <button type="button" class="admin-btn admin-btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="document.getElementById('fileInputEp').click()">Choose File</button>
+                                <button type="button" class="admin-btn admin-btn-danger remove-file-btn" id="epRemoveBtn" aria-label="Remove pattern document" style="display: none; padding: 6px 12px; font-size: 12px; background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; cursor: pointer;">Remove File</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="uploadStatusMsg" style="margin-bottom: 20px; font-size: 14px; font-weight: 600;"></div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                        <button type="button" id="startImportPipelineBtn" class="admin-btn admin-btn-primary" disabled>
+                            Start Automated Import Pipeline
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOUNDER PROFILES -->
+            <section id="tab-founders" class="admin-tab-content" style="display: none;">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Founder Profiles</h2>
+                            <p class="admin-card-subtitle">Update the three public founder profiles. Images are validated and uploaded securely to Cloudinary.</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+                        Choose a JPG, JPEG, PNG, or WebP image up to 5 MB. Saving a profile publishes its name, Co-Founder designation, optional biography, and Cloudinary image URL on the homepage.
+                    </p>
+                    <p id="founderAdminLoadStatus" role="status" style="margin-top: 12px; font-size: 13px;"></p>
+                </div>
+
+                <div id="founderAdminProfiles">
+                    <form class="admin-card founder-admin-form" data-founder-id="founder-1">
+                        <h3 class="admin-card-title" style="margin-bottom: 18px;">Founder 1</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="founder1Name">Full name</label>
+                                <input id="founder1Name" name="name" type="text" value="Rupendra Kumar" maxlength="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <input type="text" value="Co-Founder" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label for="founder1Bio">Short biography (optional)</label>
+                            <textarea id="founder1Bio" name="bio" maxlength="600" rows="3" style="width: 100%; padding: 11px 14px; border: 1px solid #d4d7e2; border-radius: 8px; font: inherit; resize: vertical;"></textarea>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label for="founder1Photo">Profile photograph</label>
+                            <input id="founder1Photo" name="image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                            <span class="form-helper">JPG, JPEG, PNG, or WebP; maximum 5 MB.</span>
+                            <img class="founder-admin-preview" alt="Founder 1 photo preview" hidden style="width: 96px; height: 96px; object-fit: cover; border-radius: 50%; margin-top: 8px;">
+                        </div>
+                        <p class="founder-admin-status" role="status" style="font-size: 13px; margin-bottom: 12px;"></p>
+                        <button type="submit" class="admin-btn admin-btn-primary">Save Founder Profile</button>
+                    </form>
+
+                    <form class="admin-card founder-admin-form" data-founder-id="founder-2">
+                        <h3 class="admin-card-title" style="margin-bottom: 18px;">Founder 2</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="founder2Name">Full name</label>
+                                <input id="founder2Name" name="name" type="text" value="Sahil Kumar" maxlength="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <input type="text" value="Co-Founder" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label for="founder2Bio">Short biography (optional)</label>
+                            <textarea id="founder2Bio" name="bio" maxlength="600" rows="3" style="width: 100%; padding: 11px 14px; border: 1px solid #d4d7e2; border-radius: 8px; font: inherit; resize: vertical;"></textarea>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label for="founder2Photo">Profile photograph</label>
+                            <input id="founder2Photo" name="image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                            <span class="form-helper">JPG, JPEG, PNG, or WebP; maximum 5 MB.</span>
+                            <img class="founder-admin-preview" alt="Founder 2 photo preview" hidden style="width: 96px; height: 96px; object-fit: cover; border-radius: 50%; margin-top: 8px;">
+                        </div>
+                        <p class="founder-admin-status" role="status" style="font-size: 13px; margin-bottom: 12px;"></p>
+                        <button type="submit" class="admin-btn admin-btn-primary">Save Founder Profile</button>
+                    </form>
+
+                    <form class="admin-card founder-admin-form" data-founder-id="founder-3">
+                        <h3 class="admin-card-title" style="margin-bottom: 18px;">Founder 3</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="founder3Name">Full name</label>
+                                <input id="founder3Name" name="name" type="text" value="Shivam Kumar" maxlength="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <input type="text" value="Co-Founder" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label for="founder3Bio">Short biography (optional)</label>
+                            <textarea id="founder3Bio" name="bio" maxlength="600" rows="3" style="width: 100%; padding: 11px 14px; border: 1px solid #d4d7e2; border-radius: 8px; font: inherit; resize: vertical;"></textarea>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label for="founder3Photo">Profile photograph</label>
+                            <input id="founder3Photo" name="image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                            <span class="form-helper">JPG, JPEG, PNG, or WebP; maximum 5 MB.</span>
+                            <img class="founder-admin-preview" alt="Founder 3 photo preview" hidden style="width: 96px; height: 96px; object-fit: cover; border-radius: 50%; margin-top: 8px;">
+                        </div>
+                        <p class="founder-admin-status" role="status" style="font-size: 13px; margin-bottom: 12px;"></p>
+                        <button type="submit" class="admin-btn admin-btn-primary">Save Founder Profile</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- TAB 3: IMPORT HISTORY -->
+            <section id="tab-history" class="admin-tab-content" style="display: none;">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Import History & Audit Log</h2>
+                            <p class="admin-card-subtitle">All imported question papers and processing jobs</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="historySearchInput" placeholder="Search by paper code or job ID..." style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px;">
+                            <select id="historyStatusFilter" style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px;">
+                                <option value="">All Statuses</option>
+                                <option value="ready_to_publish">Ready to Publish</option>
+                                <option value="published">Published</option>
+                                <option value="needs_review">Needs Review</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Job ID</th>
+                                    <th>Exam</th>
+                                    <th>Year</th>
+                                    <th>Code</th>
+                                    <th>Status</th>
+                                    <th>Extracted</th>
+                                    <th>Verified</th>
+                                    <th style="min-width: 220px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <tr>
+                                    <td colspan="8" style="text-align: center; color: #94a3b8; padding: 24px;">Loading import history...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: ADMIN USER MANAGEMENT (Firestore-Managed) -->
+            <section id="tab-users" class="admin-tab-content" style="display: none;">
+                <!-- MANUAL FIRESTORE CONSOLE GUIDANCE CARD -->
+                <div class="admin-card" style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #635bff;">
+                    <div style="display: flex; gap: 14px; align-items: flex-start;">
+                        <span style="font-size: 26px;">&#128274;</span>
+                        <div style="flex: 1;">
+                            <h3 style="font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 6px;">Firestore-Managed Admin Access Control</h3>
+                            <p style="font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 12px;">
+                                In compliance with the VidyarthiAstra security architecture, admin privileges cannot be granted or revoked via application forms, bootstrap scripts, or client tokens.
+                                The <strong>sole authoritative source</strong> is the user's document in Cloud Firestore.
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 10px;">
+                                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                                    <div style="font-weight: 700; color: #166534; font-size: 13px; margin-bottom: 6px;">&#10003; Granting Administrator Access:</div>
+                                    <ol style="font-size: 13px; color: #334155; margin: 0; padding-left: 18px; line-height: 1.5;">
+                                        <li>Locate user's <code>Firebase UID</code> in Firebase Authentication.</li>
+                                        <li>Open Firebase Console &rarr; Firestore Database.</li>
+                                        <li>Open collection <code>users</code> &rarr; document <code>{uid}</code>.</li>
+                                        <li>Set field: <code>role = "admin"</code> (type: string).</li>
+                                        <li>Save. Access is granted immediately on next request.</li>
+                                    </ol>
+                                </div>
+                                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                                    <div style="font-weight: 700; color: #991b1b; font-size: 13px; margin-bottom: 6px;">&#10007; Revoking Administrator Access:</div>
+                                    <ol style="font-size: 13px; color: #334155; margin: 0; padding-left: 18px; line-height: 1.5;">
+                                        <li>Open user document at <code>users/{uid}</code> in Firestore.</li>
+                                        <li>Change field <code>role</code> to <code>"user"</code> or delete field.</li>
+                                        <li>Save. Privilege is revoked instantly on next request.</li>
+                                        <li>Stale browser tokens cannot bypass this server check.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- USER METRICS -->
+                <div class="admin-metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">ACTIVE ADMINISTRATORS</span>
+                        <span class="metric-value ready" id="statAdminUsersTotal">0</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">AUTHORIZATION SOURCE</span>
+                        <span class="metric-value" style="font-size: 18px; color: #635bff;">Cloud Firestore</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">DOCUMENT PATH</span>
+                        <span class="metric-value" style="font-size: 16px; color: #334155;">users/{uid}</span>
+                    </div>
+                </div>
+
+                <!-- ACTIVE ADMINS TABLE -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Server-Verified Administrator Accounts</h2>
+                            <p class="admin-card-subtitle">Users with <code>role: "admin"</code> in Firestore collection <code>users</code></p>
+                        </div>
+                        <button type="button" class="admin-btn admin-btn-secondary" id="refreshAdminUsersBtn" style="padding: 6px 14px; font-size: 13px;">
+                            Refresh List
+                        </button>
+                    </div>
+
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User / Email</th>
+                                    <th>Firebase UID</th>
+                                    <th>Firestore Role</th>
+                                    <th>Status</th>
+                                    <th>Source Document</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUsersTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: #94a3b8; padding: 24px;">Loading administrator users...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- TAB 4: JOB DETAILS & REAL-TIME PROGRESS -->
+            <section id="tab-progress" class="admin-tab-content" style="display: none;">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Processing Job: <span id="progressJobId">-</span></h2>
+                            <p class="admin-card-subtitle" id="progressPaperDesc">Exam Paper Import</p>
+                        </div>
+                        <span id="progressStatusBadge" class="stage-badge processing">Processing</span>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: #151827; margin-bottom: 6px;">
+                            <span id="progressStageText">Extracting metadata...</span>
+                            <span id="progressPercentText">0%</span>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-fill" id="progressFillBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <div style="font-size: 12px; color: #64748b; font-weight: 600;">PAPER CODE</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #1e293b;" id="progressPaperCode">-</div>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <div style="font-size: 12px; color: #64748b; font-weight: 600;">QUESTIONS EXTRACTED</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #1e293b;" id="progressQuestionsCount">0</div>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <div style="font-size: 12px; color: #64748b; font-weight: 600;">VERIFIED ANSWERS</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #10b981;" id="progressVerifiedCount">0</div>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+                            <div style="font-size: 12px; color: #64748b; font-weight: 600;">FLAGGED ITEMS</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #f59e0b;" id="progressFlaggedCount">0</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                        <button type="button" class="admin-btn admin-btn-secondary" id="viewReportBtn" onclick="window.switchTab('report')">
+                            View Validation Report
+                        </button>
+                        <button type="button" class="admin-btn admin-btn-primary" id="reviewQuestionsBtn" onclick="window.switchTab('review')">
+                            Review Questions
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: VALIDATION REPORT -->
+            <section id="tab-report" class="admin-tab-content" style="display: none;">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Extraction &amp; Validation Report</h2>
+                            <p class="admin-card-subtitle">Comprehensive gate verification for scored tests</p>
+                        </div>
+                        <div id="publishGateBadge" class="stage-badge ready">CAN PUBLISH</div>
+                    </div>
+
+                    <!-- REPORT METRICS -->
+                    <div class="admin-metrics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">QUESTION COVERAGE</span>
+                            <span class="metric-value" id="reportQuestionCount">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">ANSWER KEY MATCH</span>
+                            <span class="metric-value ready" id="reportMatchCoverage">100%</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">PATTERN VERIFICATION</span>
+                            <span class="metric-value ready" id="reportPatternStatus">Verified</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">UNVERIFIED SCORED ITEMS</span>
+                            <span class="metric-value" id="reportUnverifiedCount">0</span>
+                        </div>
+                    </div>
+
+                    <!-- CHECKLISTS -->
+                    <div style="margin: 24px 0;">
+                        <h3 style="font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 12px;">Verification Breakdown</h3>
+                        
+                        <div id="reportChecklistContainer"></div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+                        <button type="button" class="admin-btn admin-btn-secondary" id="reportToReviewBtn">
+                            Inspect Flagged Questions
+                        </button>
+                        <button type="button" class="admin-btn" id="reportOverridePublishBtn" style="display: none; background: #d97706; color: #ffffff; border: 1px solid #b45309; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; align-items: center; gap: 6px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            Ignore and Publish
+                        </button>
+                        <button type="button" class="admin-btn admin-btn-success" id="reportProceedPublishBtn" disabled>
+                            Proceed to Publish
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 6: REVIEW FLAGGED QUESTIONS -->
+            <section id="tab-review" class="admin-tab-content" style="display: none;">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div>
+                            <h2 class="admin-card-title">Review Extracted Questions</h2>
+                            <p class="admin-card-subtitle">Inspect questions, formulas, diagrams, and options</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" class="admin-btn admin-btn-secondary" id="filterAllQuestionsBtn">All Questions</button>
+                            <button type="button" class="admin-btn admin-btn-primary" id="filterFlaggedQuestionsBtn">Flagged Only</button>
+                        </div>
+                    </div>
+
+                    <div id="questionsListContainer">
+                        <p style="text-align: center; color: #94a3b8; padding: 30px;">Loading questions...</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- =====================================================
+         EDIT QUESTION & SOURCE INSPECTION MODAL
+    ====================================================== -->
+    <div id="editQuestionModal" class="admin-modal-overlay">
+        <div class="admin-modal" style="max-width: 1100px; width: 95vw; max-height: 90vh; display: flex; flex-direction: column;">
+            <div class="admin-modal-header" style="flex-shrink: 0;">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 700; color: #151827; margin: 0;">
+                        Question Correction &amp; Source Inspection
+                        <span id="editModalQuestionBadge" class="question-tag" style="margin-left: 8px;">Q1</span>
+                        <span id="editModalTypeBadge" class="question-tag" style="background:#e0e7ff; color:#3730a3;">MCQ</span>
+                    </h3>
+                </div>
+                <button type="button" class="admin-modal-close" id="closeEditModalBtn">&times;</button>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; overflow-y: auto; padding: 4px 0; flex: 1;">
+                <!-- LEFT COLUMN: AUTHENTICATED SOURCE PAGE & DIAGRAM PREVIEW -->
+                <div style="display: flex; flex-direction: column; border-right: 1px solid #e2e8f0; padding-right: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label style="font-weight: 700; font-size: 13px; color: #1e293b; margin: 0;">
+                            Source PDF &amp; Diagram Inspection
+                            <span id="sourcePageBadge" class="question-tag" style="background:#f1f5f9; color:#475569; margin-left:6px;">Page 1</span>
+                        </label>
+                        <div style="display: flex; gap: 8px;">
+                            <button type="button" class="admin-btn admin-btn-secondary" id="toggleViewSourceBtn" style="padding: 3px 8px; font-size: 11px;">PDF Page</button>
+                            <button type="button" class="admin-btn admin-btn-secondary" id="toggleViewDiagramBtn" style="padding: 3px 8px; font-size: 11px; display: none;">Diagram Asset</button>
+                            <a id="sourcePreviewDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-secondary" style="padding: 3px 8px; font-size: 11px; text-decoration: none;">
+                                Open ↗
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- OCR EXTRACTION & CONFIDENCE METADATA (IF APPLICABLE) -->
+                    <div id="ocrProvenanceContainer" style="display: none; margin-bottom: 10px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; font-size: 12px; color: #1e40af;">OCR Extraction Provenance</span>
+                            <span id="ocrConfidenceBadge" class="question-tag" style="background: #dbeafe; color: #1e40af; font-size: 11px;">Conf: 85%</span>
+                        </div>
+                        <div style="font-size: 11px; color: #3b82f6; margin-top: 4px;">
+                            Engine: <strong id="ocrEngineText">tesseract.js v6.0.1</strong> | Method: <strong id="ocrMethodText">OCR Layout</strong>
+                        </div>
+                        <div id="ocrOriginalSnippetContainer" style="margin-top: 6px; font-size: 11px; color: #475569; max-height: 80px; overflow-y: auto; background: #ffffff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-family: monospace;">
+                            <span style="font-weight: 600; color: #64748b;">Raw OCR Stream:</span>
+                            <div id="ocrRawText" style="white-space: pre-wrap; margin-top: 2px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- AI VISION RECONSTRUCTION METADATA (PHASE 4.5) -->
+                    <div id="visionProvenanceContainer" style="display: none; margin-bottom: 10px; background: #fdf4ff; border: 1px solid #f0abfc; border-radius: 8px; padding: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; font-size: 12px; color: #86198f;">AI Vision Reconstruction</span>
+                            <span id="visionConfidenceBadge" class="question-tag" style="background: #fae8ff; color: #86198f; font-size: 11px;">Conf: 95%</span>
+                        </div>
+                        <div style="font-size: 11px; color: #a21caf; margin-top: 4px;">
+                            Model: <strong id="visionModelText">qwen/qwen3.8-27b</strong> | Status: <strong id="visionAutoVerifiedBadge">Auto-Verified</strong>
+                        </div>
+                    </div>
+
+                    <!-- DIAGRAM ASSET PREVIEW (IF AVAILABLE) -->
+                    <div id="diagramAssetContainer" style="display: none; margin-bottom: 10px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; max-height: 220px; overflow: hidden;">
+                        <div style="font-size: 11px; font-weight: 600; color: #64748b; margin-bottom: 6px; text-align: left;">Extracted Diagram / Visual Asset:</div>
+                        <img id="sourceDiagramPreviewImg" src="" alt="Extracted Question Diagram" style="max-height: 180px; max-width: 100%; object-fit: contain; border-radius: 4px;">
+                    </div>
+
+                    <div id="sourcePreviewContainer" style="flex: 1; min-height: 440px; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #f8fafc; position: relative;">
+                        <iframe id="sourcePreviewIframe" style="width: 100%; height: 100%; border: none;" title="Original PDF Page Source Inspection"></iframe>
+                        <div id="sourcePreviewFallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 30px; text-align: center; background: #f8fafc; flex-direction: column; align-items: center; justify-content: center;">
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Source PDF page preview could not be rendered directly in the embedded frame.</p>
+                            <a id="sourcePreviewFallbackLink" href="#" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-primary" style="font-size: 13px;">
+                                View Verified Source PDF Page ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: QUESTION DETAILS & EDITABLE FIELDS -->
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <!-- QUESTION TYPE & DIAGRAM TOGGLE -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label for="editQuestionType">Question Classification</label>
+                            <select id="editQuestionType" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px;">
+                                <option value="mcq">Multiple Choice (MCQ)</option>
+                                <option value="msq">Multiple Select (MSQ)</option>
+                                <option value="numerical">Numerical Answer Type (NAT)</option>
+                                <option value="assertion_reason">Assertion-Reason</option>
+                                <option value="match_following">Match the Following</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 8px;">
+                                <input type="checkbox" id="editHasDiagram" style="width: 16px; height: 16px;">
+                                <span>Contains Diagram / Figure</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editQuestionText">Question Body / Stem</label>
+                        <textarea id="editQuestionText" rows="4" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 14px;" placeholder="Edit question body..."></textarea>
+                    </div>
+
+                    <!-- OPTIONS CONTAINER -->
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-weight: 700; font-size: 13px;">Answer Options</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span id="editOptionsNotice" style="font-size: 12px; color: #64748b;">Options</span>
+                                <button type="button" class="admin-btn admin-btn-secondary" id="addOptionBtn" style="padding: 2px 8px; font-size: 11px;">+ Add Option</button>
+                            </div>
+                        </div>
+                        <div id="editOptionsContainer" style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Dynamic option rows injected by JS -->
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label for="editSubject">Subject</label>
+                            <input type="text" id="editSubject">
+                        </div>
+                        <div class="form-group">
+                            <label for="editTopic">Topic / Sub-discipline</label>
+                            <input type="text" id="editTopic" placeholder="e.g. Thermodynamics">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editAuditReason">Audit Reason <span style="color:#ef4444;">*</span> (min. 5 characters)</label>
+                        <input type="text" id="editAuditReason" placeholder="e.g. Verified diagram and corrected options against source PDF" required minlength="5">
+                        <span class="form-helper">Every manual edit is cryptographically recorded in the audit log and re-triggers validation.</span>
+                    </div>
+
+                    <div id="editModalAlert" style="display: none; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.4;"></div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 18px; border-top: 1px solid #eceef4; padding-top: 14px; flex-shrink: 0;">
+                <button type="button" class="admin-btn admin-btn-secondary" id="cancelEditBtn">Cancel</button>
+                <button type="button" class="admin-btn admin-btn-primary" id="saveQuestionEditBtn">Save Correction</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         CONFIRM PUBLISH MODAL
+    ====================================================== -->
+    <div id="publishConfirmModal" class="admin-modal-overlay">
+        <div class="admin-modal" style="max-width: 520px;">
+            <div class="admin-modal-header">
+                <h3 style="font-size: 18px; font-weight: 700; color: #151827;">Confirm Paper Publication</h3>
+                <button type="button" class="admin-modal-close" id="closePublishModalBtn">&times;</button>
+            </div>
+            <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-bottom: 20px;">
+                You are about to publish this paper to live student mock tests.
+                All <strong><span id="confirmPublishCount">200</span> questions</strong> and verified official answer keys will become active.
+            </p>
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 14px; border-radius: 8px; margin-bottom: 24px;">
+                <div style="font-size: 13px; font-weight: 700; color: #166534;">Authoritative Verification Gate: PASSED</div>
+                <div style="font-size: 12px; color: #15803d; margin-top: 4px;">100% answer key match coverage. Scoring rules verified (+4/-1).</div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" class="admin-btn admin-btn-secondary" id="cancelPublishBtn">Cancel</button>
+                <button type="button" class="admin-btn admin-btn-success" id="executePublishBtn">Confirm &amp; Publish Paper</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         PHASE 5.12: OVERRIDE VALIDATION AND PUBLISH CONFIRMATION MODAL
+    ====================================================== -->
+    <div id="overridePublishModal" class="admin-modal-overlay">
+        <div class="admin-modal" style="max-width: 720px; width: 95vw; max-height: 90vh; display: flex; flex-direction: column;">
+            <div class="admin-modal-header" style="flex-shrink: 0;">
+                <h3 style="font-size: 18px; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 8px; margin: 0;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Override Validation and Publish?
+                </h3>
+                <button type="button" class="admin-modal-close" id="closeOverrideModalBtn">&times;</button>
+            </div>
+            
+            <div style="overflow-y: auto; padding: 12px 0; flex: 1;">
+                <!-- WARNING MESSAGE -->
+                <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+                    <p style="font-size: 13.5px; color: #92400e; line-height: 1.55; margin: 0 0 8px 0;">
+                        This mock test contains unresolved validation discrepancies. Publishing it through this override will bypass all validation findings, including critical errors. The questions, answer keys, marking configuration, and other existing test data will be published without modification.
+                    </p>
+                    <p style="font-size: 13px; color: #b45309; font-weight: 700; margin: 0;">
+                        Publishing does not mean that the discrepancies have been corrected.
+                    </p>
+                </div>
+
+                <!-- DISCREPANCY SUMMARY PILLS (6 Categories) -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 8px; margin-bottom: 16px;">
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                        <div style="font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase;">Total</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #0f172a;" id="overrideTotalCount">0</div>
+                    </div>
+                    <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                        <div style="font-size: 10px; color: #991b1b; font-weight: 700; text-transform: uppercase;">Critical</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #dc2626;" id="overrideCriticalCount">0</div>
+                    </div>
+                    <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                        <div style="font-size: 10px; color: #9a3412; font-weight: 700; text-transform: uppercase;">Major</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #ea580c;" id="overrideMajorCount">0</div>
+                    </div>
+                    <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                        <div style="font-size: 10px; color: #854d0e; font-weight: 700; text-transform: uppercase;">Minor</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #ca8a04;" id="overrideMinorCount">0</div>
+                    </div>
+                    <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                        <div style="font-size: 10px; color: #92400e; font-weight: 700; text-transform: uppercase;">Warnings</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #d97706;" id="overrideWarningCount">0</div>
+                    </div>
+                    <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                        <div style="font-size: 10px; color: #475569; font-weight: 700; text-transform: uppercase;">Other</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #334155;" id="overrideOtherCount">0</div>
+                    </div>
+                </div>
+
+                <!-- DETAILED DISCREPANCY LIST -->
+                <div style="margin-bottom: 16px;">
+                    <label style="font-size: 13px; font-weight: 700; color: #1e293b; display: block; margin-bottom: 6px;">
+                        Unresolved Validation Findings
+                    </label>
+                    <div id="overrideDiscrepanciesList" style="display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; background: #fafafa;">
+                        <p style="text-align: center; color: #94a3b8; font-size: 13px; padding: 12px; margin: 0;">Loading validation findings...</p>
+                    </div>
+                </div>
+
+                <!-- OPTIONAL REASON FIELD -->
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label for="overrideReasonInput" style="font-size: 13px; font-weight: 700; color: #1e293b; display: block; margin-bottom: 4px;">
+                        Reason for administrative override (Optional)
+                    </label>
+                    <textarea id="overrideReasonInput" rows="3" placeholder="Enter justification or operational notes for this override (optional)..." style="width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; font-family: inherit; box-sizing: border-box;"></textarea>
+                    <span class="form-helper" style="font-size: 11px; color: #64748b;">This field is optional. All override operations are permanently recorded in the administrative audit log.</span>
+                </div>
+
+                <!-- Hidden elements for backward compatibility -->
+                <div style="display: none;">
+                    <span id="overrideFatalCount">0</span>
+                    <span id="overrideEligibleCount">0</span>
+                    <div id="overrideFatalContainer"></div>
+                    <div id="overrideFatalList"></div>
+                    <div id="overrideEligibleList"></div>
+                    <input type="text" id="overrideConfirmationInput">
+                </div>
+
+                <div id="overrideModalAlert" style="display: none; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.4; margin-bottom: 12px;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 14px; border-top: 1px solid #eceef4; padding-top: 14px; flex-shrink: 0;">
+                <button type="button" class="admin-btn admin-btn-secondary" id="cancelOverrideBtn">Cancel</button>
+                <button type="button" class="admin-btn" id="executeOverridePublishBtn" style="background: #d97706; color: #ffffff; border: 1px solid #b45309; padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Confirm Ignore and Publish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PERMANENT MOCK TEST DELETION CONFIRMATION -->
+    <div id="deleteMockTestModal" class="admin-modal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px;">
+        <div class="admin-modal-content" style="background: #ffffff; border-radius: 14px; max-width: 620px; width: 100%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1); padding: 24px; max-height: 90vh; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #fecaca; padding-bottom: 14px; flex-shrink: 0;">
+                <h3 id="deleteModalHeading" style="font-size: 18px; font-weight: 800; color: #991b1b; display: flex; align-items: center; gap: 8px; margin: 0;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    Permanent Mock Test Deletion
+                </h3>
+                <button type="button" class="admin-modal-close" id="closeDeleteModalBtn" style="background: none; border: none; font-size: 22px; cursor: pointer; color: #94a3b8;">&times;</button>
+            </div>
+            
+            <div style="overflow-y: auto; padding: 4px 0; flex: 1;">
+                <!-- MULTI-TEST SELECTION (IF APPLICABLE) -->
+                <div id="deleteMultiTestSelectorContainer" style="display: none; margin-bottom: 16px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px;">
+                    <label id="deleteMultiTestLabel" for="deleteSpecificTestSelect" style="font-size: 13px; font-weight: 700; color: #92400e; display: block; margin-bottom: 6px;">
+                        This job has multiple published tests. Select the test to delete:
+                    </label>
+                    <select id="deleteSpecificTestSelect" style="width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; background: #ffffff;">
+                    </select>
+                </div>
+
+                <!-- TEST METADATA CARD -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+                    <div id="deleteModalTargetLabel" style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">Target Published Mock Test</div>
+                    <div id="deleteModalTestTitle" style="font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 8px;">Loading test details...</div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; font-size: 12px;">
+                        <div><strong id="deleteModalIdLabel" style="color: #475569;">Test ID:</strong> <code id="deleteModalTestId" style="background: #e2e8f0; padding: 2px 5px; border-radius: 4px; font-size: 11px;">-</code></div>
+                        <div><strong style="color: #475569;">Exam:</strong> <span id="deleteModalExam">-</span></div>
+                        <div><strong style="color: #475569;">Year:</strong> <span id="deleteModalYear">-</span></div>
+                        <div><strong style="color: #475569;">Paper Code:</strong> <span id="deleteModalPaperCode">-</span></div>
+                        <div><strong id="deleteModalCount1Label" style="color: #475569;">Questions:</strong> <span id="deleteModalQuestionCount">-</span></div>
+                        <div><strong id="deleteModalCount2Label" style="color: #475569;">Student Attempts:</strong> <span id="deleteModalAttemptCount">-</span></div>
+                    </div>
+                </div>
+
+                <!-- DESTRUCTIVE IMPACT WARNING -->
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <span style="font-size: 20px; line-height: 1;">&#9888;&#65039;</span>
+                        <div id="deleteModalImpactDescription" style="font-size: 13px; color: #991b1b; line-height: 1.5;">
+                            <strong>This operation is permanent and irreversible:</strong>
+                            <ul id="deleteModalImpactList" style="margin: 6px 0 0 0; padding-left: 18px;">
+                                <li>The test will immediately vanish from the student mock test catalog.</li>
+                                <li>All existing student attempts, autosaved answers, and scoring results will be permanently removed.</li>
+                                <li>Test-specific answer keys and exclusively owned questions will be deleted.</li>
+                                <li>Shared questions and source PDFs referenced by other tests/jobs will remain intact.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AUDIT REASON -->
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label for="deleteReasonInput" style="font-size: 13px; font-weight: 700; color: #1e293b;">
+                        Administrative Deletion Reason (Optional)
+                    </label>
+                    <input type="text" id="deleteReasonInput" placeholder="e.g. Cancelled exam session, duplicate import, corrupted answer key" style="width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; box-sizing: border-box;">
+                </div>
+
+                <!-- CONFIRMATION PHRASE INPUT -->
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label id="deleteConfirmationLabel" for="deleteConfirmationInput" style="font-size: 13px; font-weight: 700; color: #1e293b; display: block; margin-bottom: 4px;">
+                        Type <code id="deleteExpectedPhrase" style="background: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 4px; font-weight: 700;">-</code> to confirm <span style="color:#ef4444;">*</span>
+                    </label>
+                    <input type="text" id="deleteConfirmationInput" placeholder="Enter exact ID to confirm" autocomplete="off" style="width: 100%; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; font-family: monospace; box-sizing: border-box;">
+                </div>
+
+                <div id="deleteModalAlert" style="display: none; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.4; margin-bottom: 12px;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 14px; border-top: 1px solid #eceef4; padding-top: 14px; flex-shrink: 0;">
+                <button type="button" class="admin-btn admin-btn-secondary" id="cancelDeleteBtn">Cancel</button>
+                <button type="button" class="admin-btn" id="retryDeleteBtn" style="display: none; background: #ea580c; color: #ffffff; border: 1px solid #c2410c; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                    Retry Deletion
+                </button>
+                <button type="button" class="admin-btn" id="executeDeleteBtn" style="background: #dc2626; color: #ffffff; border: 1px solid #b91c1c; padding: 8px 16px; border-radius: 8px; font-weight: 700; opacity: 0.5; cursor: not-allowed;" disabled>
+                    Permanently Delete Mock Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/founders-admin.js"></script>
+</body>
+</html>

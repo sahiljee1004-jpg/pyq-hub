@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VidyarthiAstra — PYQ Library</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/papers.css">
+    <link rel="stylesheet" href="css/mobile-overrides.css">
+    <link rel="stylesheet" href="css/pyq-library.css">
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skeleton.css">
+</head>
+<body>
+
+    <!-- =====================================================
+         SITE HEADER
+    ====================================================== -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo" aria-label="VidyarthiAstra logo">
+                <img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img">
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" id="authButton" class="auth-button">Login/Sign up</a>
+                <a href="profile.html" id="profileCircle" class="profile-circle" style="display:none;" aria-label="Profile">
+                    <span id="profileInitial">?</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+    <main class="pyq-library-page">
+        <div class="container">
+
+            <!-- PAGE HERO & INTRO -->
+            <div class="pyq-hero">
+                <span class="pyq-badge">EXAM ARCHIVE</span>
+                <h1>PYQ Library</h1>
+                <p class="pyq-tagline">
+                    Find previous year question papers for JEE, NEET, SSC, Banking and other competitive examinations
+                </p>
+            </div>
+
+            <!-- SEARCH BAR & TOTAL COUNT TOOLBAR -->
+            <div class="pyq-toolbar">
+                <div class="pyq-search-container">
+                    <div class="pyq-search-input-wrap">
+                        <span class="pyq-search-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </span>
+                        <input
+                            type="search"
+                            id="pyqSearchInput"
+                            class="pyq-search-input"
+                            placeholder="Search examinations (e.g. JEE Main, NEET, GATE, SSC...)"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-label="Search examinations by name"
+                        />
+                        <button
+                            type="button"
+                            id="pyqClearBtn"
+                            class="pyq-clear-btn"
+                            title="Clear search query"
+                            aria-label="Clear search"
+                            style="display: none;"
+                        >&times;</button>
+                    </div>
+                    <button type="button" id="pyqSearchBtn" class="pyq-search-btn">
+                        <span>Search</span>
+                    </button>
+                </div>
+
+                <!-- TOTAL PYQ COUNTER -->
+                <div class="pyq-counter-badge" id="pyqCounterBadge">
+                    <span>Total PYQs Available:</span>
+                    <span id="totalPyqCountNum" class="pyq-counter-number"><span class="pyq-spinner" style="width:14px;height:14px;"></span></span>
+                </div>
+            </div>
+
+            <!-- BREADCRUMBS NAVIGATION -->
+            <nav id="pyqBreadcrumbsContainer" class="pyq-breadcrumbs-nav" style="display: none;" aria-label="PYQ Library Navigation">
+                <ol class="pyq-breadcrumbs" id="pyqBreadcrumbsList">
+                    <li class="pyq-breadcrumb-item"><button type="button" class="pyq-breadcrumb-link" id="bcHome">PYQ Library</button></li>
+                    <li class="pyq-breadcrumb-sep" id="bcExamSep" style="display: none;" aria-hidden="true">/</li>
+                    <li class="pyq-breadcrumb-item" id="bcExamItem" style="display: none;"><button type="button" class="pyq-breadcrumb-link" id="bcExam">JEE Main</button></li>
+                    <li class="pyq-breadcrumb-sep" id="bcYearSep" style="display: none;" aria-hidden="true">/</li>
+                    <li class="pyq-breadcrumb-item active" id="bcYearItem" style="display: none;"><span id="bcYear" class="pyq-breadcrumb-current">2026</span></li>
+                </ol>
+            </nav>
+
+            <!-- SECTION 1: BROWSE EXAMINATIONS (INITIAL DIRECTORY VIEW) -->
+            <section id="examsSection" class="pyq-section">
+                <div class="pyq-section-title-wrap">
+                    <h2 class="pyq-section-title">Browse Examinations</h2>
+                    <p class="pyq-section-note">Select an examination to view available question papers by year</p>
+                </div>
+
+                <div id="examsLoading" class="pyq-state-box">
+                    <div class="pyq-spinner" style="width:28px;height:28px;margin-bottom:12px;"></div>
+                    <p class="pyq-state-desc">Loading available examinations...</p>
+                </div>
+
+                <div id="examsEmpty" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-state-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <h3 class="pyq-state-title">No examinations found</h3>
+                    <p class="pyq-state-desc" id="examsEmptyDesc">No examinations with available PYQs matched your search.</p>
+                </div>
+
+                <div id="examsError" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-state-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.75">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3 class="pyq-state-title">Unable to load examinations</h3>
+                    <p class="pyq-state-desc">Unable to retrieve examination directory. Please try again.</p>
+                    <button type="button" id="examsRetryBtn" class="pyq-retry-btn">Retry</button>
+                </div>
+
+                <div id="examsGrid" class="pyq-cards-grid pyq-exams-grid" style="display: none;"></div>
+            </section>
+
+            <!-- SECTION 2: SELECT EXAMINATION YEAR -->
+            <section id="yearsSection" class="pyq-section" style="display: none;">
+                <div class="pyq-section-header-nav">
+                    <button type="button" id="backToExamsBtn" class="pyq-back-nav-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        <span>Back to Examinations</span>
+                    </button>
+                </div>
+
+                <div class="pyq-section-title-wrap">
+                    <h2 id="yearsExamTitle" class="pyq-section-title">Select Examination Year</h2>
+                    <p id="yearsExamSubtitle" class="pyq-section-note">Select a year to browse question papers</p>
+                </div>
+
+                <div id="yearsLoading" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-spinner" style="width:28px;height:28px;margin-bottom:12px;"></div>
+                    <p class="pyq-state-desc">Loading available years...</p>
+                </div>
+
+                <div id="yearsEmpty" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-state-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3 class="pyq-state-title">No years available</h3>
+                    <p class="pyq-state-desc">No question papers are registered under this examination yet.</p>
+                </div>
+
+                <div id="yearsError" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-state-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.75">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3 class="pyq-state-title">Unable to load years</h3>
+                    <p class="pyq-state-desc">Unable to retrieve available years. Please try again.</p>
+                    <button type="button" id="yearsRetryBtn" class="pyq-retry-btn">Retry</button>
+                </div>
+
+                <div id="yearsGrid" class="pyq-cards-grid pyq-years-grid" style="display: none;"></div>
+            </section>
+
+            <!-- SECTION 3: QUESTION PAPERS LIST -->
+            <section id="papersSection" class="pyq-section" style="display: none;">
+                <div class="pyq-section-header-nav">
+                    <button type="button" id="backToYearsBtn" class="pyq-back-nav-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        <span>Back to Years</span>
+                    </button>
+                </div>
+
+                <div class="pyq-section-title-wrap">
+                    <h2 id="papersSectionTitle" class="pyq-section-title">Question Papers</h2>
+                    <p id="papersSectionSubtitle" class="pyq-section-note">Browse question papers for this session</p>
+                </div>
+
+                <div id="papersLoading" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-spinner" style="width:28px;height:28px;margin-bottom:12px;"></div>
+                    <p class="pyq-state-desc">Loading question papers...</p>
+                </div>
+
+                <div id="papersEmpty" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-state-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3 class="pyq-state-title">No question papers found</h3>
+                    <p class="pyq-state-desc">No papers are available for the selected session.</p>
+                </div>
+
+                <div id="papersError" class="pyq-state-box" style="display: none;">
+                    <div class="pyq-state-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.75">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3 class="pyq-state-title">Unable to load question papers</h3>
+                    <p class="pyq-state-desc">Unable to retrieve papers right now. Please try again.</p>
+                    <button type="button" id="papersRetryBtn" class="pyq-retry-btn">Retry</button>
+                </div>
+
+                <div id="papersGrid" class="pyq-cards-grid" style="display: none;"></div>
+
+                <!-- LOAD MORE BUTTON -->
+                <div id="loadMoreContainer" class="pyq-load-more-wrap" style="display: none;">
+                    <button type="button" id="loadMoreBtn" class="pyq-load-more-btn">
+                        <span>Load More Papers</span>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="year"></span> VidyarthiAstra. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- =====================================================
+         PDF PREVIEW VIEWER MODAL (SHARED CANVAS VIEWER)
+    ====================================================== -->
+    <div id="paperViewer" class="pdf-viewer hidden" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+        <div class="pdf-viewer-header">
+            <div class="pdf-viewer-title">
+                <span class="pdf-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                </span>
+                <span id="viewerTitle">Question Paper</span>
+            </div>
+
+            <!-- PDF ZOOM TOOLBAR -->
+            <div class="pdf-zoom-toolbar" role="toolbar" aria-label="PDF Zoom Controls">
+                <button type="button" id="pdfZoomOutBtn" class="zoom-btn" aria-label="Zoom out" title="Zoom Out">−</button>
+                <button type="button" id="pdfZoomLevelBtn" class="zoom-level-btn" aria-label="Reset to 100%" title="Set to 100%">100%</button>
+                <button type="button" id="pdfZoomInBtn" class="zoom-btn" aria-label="Zoom in" title="Zoom In">+</button>
+                <button type="button" id="pdfZoomFitBtn" class="zoom-fit-btn active" aria-label="Fit to width" title="Fit to Width">Fit Width</button>
+                <button type="button" id="pdfZoomFitPageBtn" class="zoom-fit-btn" aria-label="Fit to page" title="Fit to Page">Fit Page</button>
+            </div>
+
+            <div class="pdf-viewer-actions">
+                <button type="button" id="closeViewer" class="viewer-close" aria-label="Close PDF">&times;</button>
+            </div>
+        </div>
+
+        <div class="pdf-viewer-body" id="pdfViewerBody">
+            <div id="pdfLoading" class="pdf-state-msg">
+                <div class="pdf-spinner"></div>
+                <p>Loading PDF document...</p>
+            </div>
+            <div id="pdfError" class="pdf-state-msg hidden">
+                <p class="pdf-error-icon">⚠️</p>
+                <h4 id="pdfErrorTitle">Unable to display PDF preview</h4>
+                <p id="pdfErrorDesc">Tap below to retry or view the paper in your browser.</p>
+                <div class="pdf-error-actions">
+                    <button type="button" id="pdfRetryBtn" class="pdf-btn-secondary">Retry</button>
+                    <button type="button" id="pdfFallbackBtn" class="pdf-btn-primary">Open in Browser</button>
+                </div>
+            </div>
+            <div id="pdfCanvasContainer" class="pdf-canvas-container"></div>
+            <iframe id="pdfFrame" title="Question Paper PDF" src="about:blank" class="hidden"></iframe>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         AUTHENTICATION REQUIRED MODAL FOR DOWNLOADS
+    ====================================================== -->
+    <div id="authRequiredModal" class="pyq-modal hidden" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+        <div class="pyq-modal-backdrop" id="authModalBackdrop"></div>
+        <div class="pyq-modal-content">
+            <div class="pyq-modal-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h3 id="authModalTitle" class="pyq-modal-title">Sign In Required to Download</h3>
+            <p class="pyq-modal-desc">
+                Question paper downloads are exclusive to registered VidyarthiAstra students. Please log in or create a free account to continue.
+            </p>
+            <div class="pyq-modal-actions">
+                <a href="login.html" class="pyq-btn pyq-btn-primary">Login / Sign Up</a>
+                <button type="button" id="authModalCloseBtn" class="pyq-btn pyq-btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/pdf.min.js"></script>
+    <script type="module" src="js/firebase.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/header.js"></script>
+    <script type="module" src="js/pyq-library.js"></script>
+    <script type="module" src="js/skeleton-manager.js"></script>
+</body>
+</html>
+

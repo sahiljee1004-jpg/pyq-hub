@@ -1,0 +1,989 @@
+{
+  "metadata": {
+    "description": "Approved Historical Attempt Migration Benchmark Dataset (Profile-Aware Sections)",
+    "version": "2.0.0",
+    "generatedAt": "2026-11-10T11:44:34.390Z",
+    "totalTests": 14,
+    "totalAttempts": 21,
+    "totalResults": 21
+  },
+  "tests": [
+    {
+      "testId": "test_upsc_2024",
+      "examId": "upsc-prelims",
+      "year": 2024,
+      "title": "UPSC Prelims 2024",
+      "durationMinutes": 120,
+      "maximumMarks": 200
+    },
+    {
+      "testId": "test_upsc_2026",
+      "examId": "upsc-prelims",
+      "year": 2026,
+      "title": "UPSC Prelims 2026",
+      "durationMinutes": 120,
+      "maximumMarks": 200
+    },
+    {
+      "testId": "test_bpsc_2023",
+      "examId": "bpsc",
+      "year": 2023,
+      "title": "BPSC 69th 2023",
+      "durationMinutes": 120,
+      "maximumMarks": 150
+    },
+    {
+      "testId": "test_jee_2024",
+      "examId": "jee-main",
+      "year": 2024,
+      "title": "JEE Main 2024 Session 1",
+      "durationMinutes": 180,
+      "maximumMarks": 300
+    },
+    {
+      "testId": "test_jee_2026",
+      "examId": "jee-main",
+      "year": 2026,
+      "title": "JEE Main 2026 Model",
+      "durationMinutes": 180,
+      "maximumMarks": 300
+    },
+    {
+      "testId": "test_neet_2024",
+      "examId": "neet-ug",
+      "year": 2024,
+      "title": "NEET UG 2024",
+      "durationMinutes": 200,
+      "maximumMarks": 720
+    },
+    {
+      "testId": "test_gate_2024",
+      "examId": "gate",
+      "year": 2024,
+      "title": "GATE CS 2024",
+      "durationMinutes": 180,
+      "maximumMarks": 100
+    },
+    {
+      "testId": "test_ssc_2024",
+      "examId": "ssc-cgl",
+      "year": 2024,
+      "title": "SSC CGL 2024 Tier 1",
+      "durationMinutes": 60,
+      "maximumMarks": 200
+    },
+    {
+      "testId": "test_ibps_2024",
+      "examId": "banking-ibps-po",
+      "year": 2024,
+      "title": "IBPS PO 2024 Prelims",
+      "durationMinutes": 60,
+      "maximumMarks": 100
+    },
+    {
+      "testId": "test_jeeadv_2024",
+      "examId": "jee-advanced",
+      "year": 2024,
+      "title": "JEE Advanced 2024 Paper 1",
+      "durationMinutes": 180,
+      "maximumMarks": 180
+    },
+    {
+      "testId": "test_cuet_2024",
+      "examId": "cuet",
+      "year": 2024,
+      "title": "CUET UG 2024 Domain",
+      "durationMinutes": 45,
+      "maximumMarks": 200
+    },
+    {
+      "testId": "test_univ_2024",
+      "examId": "university-semester",
+      "year": 2024,
+      "title": "University Semester Default Archetype",
+      "durationMinutes": 180,
+      "maximumMarks": 100
+    },
+    {
+      "testId": "test_unsupported_gre",
+      "examId": "gre-general",
+      "year": 2024,
+      "title": "GRE General Exam",
+      "durationMinutes": 120,
+      "maximumMarks": 340
+    },
+    {
+      "testId": "test_unsupported_old_jee",
+      "examId": "jee-main",
+      "year": 2010,
+      "title": "JEE 2010 (Unregistered Year)",
+      "durationMinutes": 180,
+      "maximumMarks": 300
+    }
+  ],
+  "attempts": [
+    {
+      "attemptId": "att_hist_valid_01",
+      "testId": "test_upsc_2024",
+      "userId": "student_hist_01",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_1_1": "A",
+        "q_1_2": "B",
+        "q_1_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_02",
+      "testId": "test_upsc_2026",
+      "userId": "student_hist_02",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_2_1": "A",
+        "q_2_2": "B",
+        "q_2_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_03",
+      "testId": "test_bpsc_2023",
+      "userId": "student_hist_03",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_3_1": "A",
+        "q_3_2": "B",
+        "q_3_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_04",
+      "testId": "test_jee_2024",
+      "userId": "student_hist_04",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_4_1": "A",
+        "q_4_2": "B",
+        "q_4_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_05",
+      "testId": "test_jee_2026",
+      "userId": "student_hist_05",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_5_1": "A",
+        "q_5_2": "B",
+        "q_5_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_06",
+      "testId": "test_neet_2024",
+      "userId": "student_hist_06",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_6_1": "A",
+        "q_6_2": "B",
+        "q_6_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_07",
+      "testId": "test_gate_2024",
+      "userId": "student_hist_07",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_7_1": "A",
+        "q_7_2": "B",
+        "q_7_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_08",
+      "testId": "test_ssc_2024",
+      "userId": "student_hist_08",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_8_1": "A",
+        "q_8_2": "B",
+        "q_8_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_09",
+      "testId": "test_ibps_2024",
+      "userId": "student_hist_09",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_9_1": "A",
+        "q_9_2": "B",
+        "q_9_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_10",
+      "testId": "test_jeeadv_2024",
+      "userId": "student_hist_10",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_10_1": "A",
+        "q_10_2": "B",
+        "q_10_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_11",
+      "testId": "test_cuet_2024",
+      "userId": "student_hist_11",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_11_1": "A",
+        "q_11_2": "B",
+        "q_11_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_valid_12",
+      "testId": "test_univ_2024",
+      "userId": "student_hist_12",
+      "status": "submitted",
+      "startedAt": "2024-06-01T09:00:00.000Z",
+      "submittedAt": "2024-06-01T11:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q_12_1": "A",
+        "q_12_2": "B",
+        "q_12_3": "C"
+      }
+    },
+    {
+      "attemptId": "att_hist_descriptive_01",
+      "testId": "test_univ_2024",
+      "userId": "student_desc_01",
+      "status": "submitted",
+      "startedAt": "2024-06-02T10:00:00.000Z",
+      "submittedAt": "2024-06-02T12:00:00.000Z",
+      "timeTakenSeconds": 7200,
+      "answers": {
+        "q1": "A",
+        "q2": "Subjective long form explanation..."
+      }
+    },
+    {
+      "attemptId": "att_hist_already_migrated_01",
+      "testId": "test_jee_2024",
+      "userId": "student_migrated_01",
+      "status": "submitted",
+      "schemaVersion": 2,
+      "profileId": "jee-main-2024",
+      "migratedAt": "2026-11-05T08:00:00.000Z"
+    },
+    {
+      "attemptId": "att_hist_in_progress_01",
+      "testId": "test_neet_2024",
+      "userId": "student_active_01",
+      "status": "in_progress",
+      "startedAt": "2026-11-10T11:44:34.391Z"
+    },
+    {
+      "attemptId": "att_hist_unsupported_profile_01",
+      "testId": "test_unsupported_gre",
+      "userId": "student_gre_01",
+      "status": "submitted"
+    },
+    {
+      "attemptId": "att_hist_unsupported_year_01",
+      "testId": "test_unsupported_old_jee",
+      "userId": "student_oldjee_01",
+      "status": "submitted"
+    },
+    {
+      "attemptId": "att_hist_corrupted_meta_01",
+      "testId": "test_jee_2024",
+      "status": "submitted"
+    },
+    {
+      "attemptId": "att_hist_orphaned_attempt_01",
+      "testId": "test_gate_2024",
+      "userId": "student_orphan_01",
+      "status": "submitted"
+    },
+    {
+      "attemptId": "att_hist_duplicate_result_01",
+      "testId": "test_bpsc_2023",
+      "userId": "student_dup_01",
+      "status": "submitted"
+    },
+    {
+      "attemptId": "att_hist_score_mismatch_01",
+      "testId": "test_jee_2024",
+      "userId": "student_tamper_01",
+      "status": "submitted"
+    }
+  ],
+  "results": [
+    {
+      "resultId": "att_hist_valid_01",
+      "attemptId": "att_hist_valid_01",
+      "testId": "test_upsc_2024",
+      "userId": "student_hist_01",
+      "totalScore": 3.3333,
+      "maximumMarks": 200,
+      "percentageScore": 1.67,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_1_1",
+          "questionNumber": 1,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "general_studies"
+        },
+        {
+          "questionId": "q_1_2",
+          "questionNumber": 2,
+          "marksAwarded": -0.6667,
+          "isCorrect": false,
+          "sectionId": "general_studies"
+        },
+        {
+          "questionId": "q_1_3",
+          "questionNumber": 3,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "general_studies"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_02",
+      "attemptId": "att_hist_valid_02",
+      "testId": "test_upsc_2026",
+      "userId": "student_hist_02",
+      "totalScore": 3.3333,
+      "maximumMarks": 200,
+      "percentageScore": 1.67,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_2_1",
+          "questionNumber": 1,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "general_studies"
+        },
+        {
+          "questionId": "q_2_2",
+          "questionNumber": 2,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "general_studies"
+        },
+        {
+          "questionId": "q_2_3",
+          "questionNumber": 3,
+          "marksAwarded": -0.6667,
+          "isCorrect": false,
+          "sectionId": "general_studies"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_03",
+      "attemptId": "att_hist_valid_03",
+      "testId": "test_bpsc_2023",
+      "userId": "student_hist_03",
+      "totalScore": 1.6667,
+      "maximumMarks": 150,
+      "percentageScore": 1.11,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_3_1",
+          "questionNumber": 1,
+          "marksAwarded": 1,
+          "isCorrect": true,
+          "sectionId": "general_studies"
+        },
+        {
+          "questionId": "q_3_2",
+          "questionNumber": 2,
+          "marksAwarded": -0.3333,
+          "isCorrect": false,
+          "sectionId": "general_studies"
+        },
+        {
+          "questionId": "q_3_3",
+          "questionNumber": 3,
+          "marksAwarded": 1,
+          "isCorrect": true,
+          "sectionId": "general_studies"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_04",
+      "attemptId": "att_hist_valid_04",
+      "testId": "test_jee_2024",
+      "userId": "student_hist_04",
+      "totalScore": 7,
+      "maximumMarks": 300,
+      "percentageScore": 2.33,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_4_1",
+          "questionNumber": 1,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "math_a"
+        },
+        {
+          "questionId": "q_4_2",
+          "questionNumber": 2,
+          "marksAwarded": -1,
+          "isCorrect": false,
+          "sectionId": "math_a"
+        },
+        {
+          "questionId": "q_4_3",
+          "questionNumber": 3,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "math_a"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_05",
+      "attemptId": "att_hist_valid_05",
+      "testId": "test_jee_2026",
+      "userId": "student_hist_05",
+      "totalScore": 7,
+      "maximumMarks": 300,
+      "percentageScore": 2.33,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_5_1",
+          "questionNumber": 1,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "math_a"
+        },
+        {
+          "questionId": "q_5_2",
+          "questionNumber": 2,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "math_a"
+        },
+        {
+          "questionId": "q_5_3",
+          "questionNumber": 3,
+          "marksAwarded": -1,
+          "isCorrect": false,
+          "sectionId": "math_a"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_06",
+      "attemptId": "att_hist_valid_06",
+      "testId": "test_neet_2024",
+      "userId": "student_hist_06",
+      "totalScore": 7,
+      "maximumMarks": 720,
+      "percentageScore": 0.97,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_6_1",
+          "questionNumber": 1,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "physics_a"
+        },
+        {
+          "questionId": "q_6_2",
+          "questionNumber": 2,
+          "marksAwarded": -1,
+          "isCorrect": false,
+          "sectionId": "physics_a"
+        },
+        {
+          "questionId": "q_6_3",
+          "questionNumber": 3,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "physics_a"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_07",
+      "attemptId": "att_hist_valid_07",
+      "testId": "test_gate_2024",
+      "userId": "student_hist_07",
+      "totalScore": 2.6667,
+      "maximumMarks": 100,
+      "percentageScore": 2.67,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_7_1",
+          "questionNumber": 1,
+          "marksAwarded": 1,
+          "isCorrect": true,
+          "sectionId": "ga_section"
+        },
+        {
+          "questionId": "q_7_2",
+          "questionNumber": 2,
+          "marksAwarded": -0.3333,
+          "isCorrect": false,
+          "sectionId": "ga_section"
+        },
+        {
+          "questionId": "q_7_3",
+          "questionNumber": 3,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "ga_section"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_08",
+      "attemptId": "att_hist_valid_08",
+      "testId": "test_ssc_2024",
+      "userId": "student_hist_08",
+      "totalScore": 3.5,
+      "maximumMarks": 200,
+      "percentageScore": 1.75,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_8_1",
+          "questionNumber": 1,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "general_intelligence"
+        },
+        {
+          "questionId": "q_8_2",
+          "questionNumber": 2,
+          "marksAwarded": -0.5,
+          "isCorrect": false,
+          "sectionId": "general_intelligence"
+        },
+        {
+          "questionId": "q_8_3",
+          "questionNumber": 3,
+          "marksAwarded": 2,
+          "isCorrect": true,
+          "sectionId": "general_intelligence"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_09",
+      "attemptId": "att_hist_valid_09",
+      "testId": "test_ibps_2024",
+      "userId": "student_hist_09",
+      "totalScore": 1.75,
+      "maximumMarks": 100,
+      "percentageScore": 1.75,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_9_1",
+          "questionNumber": 1,
+          "marksAwarded": 1,
+          "isCorrect": true,
+          "sectionId": "english_language"
+        },
+        {
+          "questionId": "q_9_2",
+          "questionNumber": 2,
+          "marksAwarded": -0.25,
+          "isCorrect": false,
+          "sectionId": "english_language"
+        },
+        {
+          "questionId": "q_9_3",
+          "questionNumber": 3,
+          "marksAwarded": 1,
+          "isCorrect": true,
+          "sectionId": "english_language"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_10",
+      "attemptId": "att_hist_valid_10",
+      "testId": "test_jeeadv_2024",
+      "userId": "student_hist_10",
+      "totalScore": 6,
+      "maximumMarks": 180,
+      "percentageScore": 3.33,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_10_1",
+          "questionNumber": 1,
+          "marksAwarded": 3,
+          "isCorrect": true,
+          "sectionId": "physics_sec1"
+        },
+        {
+          "questionId": "q_10_2",
+          "questionNumber": 2,
+          "marksAwarded": -1,
+          "isCorrect": false,
+          "sectionId": "physics_sec1"
+        },
+        {
+          "questionId": "q_10_3",
+          "questionNumber": 3,
+          "marksAwarded": 4,
+          "isCorrect": true,
+          "sectionId": "physics_sec1"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_11",
+      "attemptId": "att_hist_valid_11",
+      "testId": "test_cuet_2024",
+      "userId": "student_hist_11",
+      "totalScore": 9,
+      "maximumMarks": 200,
+      "percentageScore": 4.5,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 1,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_11_1",
+          "questionNumber": 1,
+          "marksAwarded": 5,
+          "isCorrect": true,
+          "sectionId": "domain_section"
+        },
+        {
+          "questionId": "q_11_2",
+          "questionNumber": 2,
+          "marksAwarded": -1,
+          "isCorrect": false,
+          "sectionId": "domain_section"
+        },
+        {
+          "questionId": "q_11_3",
+          "questionNumber": 3,
+          "marksAwarded": 5,
+          "isCorrect": true,
+          "sectionId": "domain_section"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_valid_12",
+      "attemptId": "att_hist_valid_12",
+      "testId": "test_univ_2024",
+      "userId": "student_hist_12",
+      "totalScore": 20,
+      "maximumMarks": 100,
+      "percentageScore": 20,
+      "totalQuestions": 3,
+      "correctCount": 2,
+      "incorrectCount": 0,
+      "unansweredCount": 1,
+      "droppedCount": 0,
+      "attemptedCount": 3,
+      "accuracyPercent": 66.67,
+      "breakdown": [
+        {
+          "questionId": "q_12_1",
+          "questionNumber": 1,
+          "marksAwarded": 10,
+          "isCorrect": true,
+          "sectionId": "general_section"
+        },
+        {
+          "questionId": "q_12_2",
+          "questionNumber": 2,
+          "marksAwarded": 0,
+          "isCorrect": false,
+          "sectionId": "general_section"
+        },
+        {
+          "questionId": "q_12_3",
+          "questionNumber": 3,
+          "marksAwarded": 10,
+          "isCorrect": true,
+          "sectionId": "general_section"
+        }
+      ],
+      "submittedAt": "2024-06-01T11:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_descriptive_01",
+      "attemptId": "att_hist_descriptive_01",
+      "testId": "test_univ_2024",
+      "userId": "student_desc_01",
+      "totalScore": 10,
+      "maximumMarks": 100,
+      "percentageScore": 10,
+      "totalQuestions": 2,
+      "correctCount": 1,
+      "incorrectCount": 0,
+      "unansweredCount": 0,
+      "droppedCount": 0,
+      "attemptedCount": 2,
+      "pendingReviewCount": 1,
+      "requiresManualEvaluation": true,
+      "isFinalized": false,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 10,
+          "isCorrect": true,
+          "questionType": "mcq",
+          "sectionId": "general_section"
+        },
+        {
+          "questionId": "q2",
+          "marksAwarded": 0,
+          "isCorrect": false,
+          "questionType": "descriptive",
+          "sectionId": "general_section",
+          "status": "pending_manual_review",
+          "requiresManualReview": true
+        }
+      ],
+      "submittedAt": "2024-06-02T12:00:00.000Z"
+    },
+    {
+      "resultId": "att_hist_already_migrated_01",
+      "attemptId": "att_hist_already_migrated_01",
+      "testId": "test_jee_2024",
+      "userId": "student_migrated_01",
+      "totalScore": 100,
+      "maximumMarks": 300,
+      "schemaVersion": 2,
+      "profileId": "jee-main-2024",
+      "migratedAt": "2026-11-05T08:00:00.000Z",
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 100,
+          "sectionId": "math_a"
+        }
+      ]
+    },
+    {
+      "resultId": "att_hist_unsupported_profile_01",
+      "attemptId": "att_hist_unsupported_profile_01",
+      "testId": "test_unsupported_gre",
+      "userId": "student_gre_01",
+      "totalScore": 310,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 310
+        }
+      ]
+    },
+    {
+      "resultId": "att_hist_unsupported_year_01",
+      "attemptId": "att_hist_unsupported_year_01",
+      "testId": "test_unsupported_old_jee",
+      "userId": "student_oldjee_01",
+      "totalScore": 50,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 50
+        }
+      ]
+    },
+    {
+      "resultId": "att_hist_corrupted_meta_01",
+      "attemptId": "att_hist_corrupted_meta_01",
+      "testId": "test_jee_2024",
+      "totalScore": 20,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 20,
+          "sectionId": "math_a"
+        }
+      ]
+    },
+    {
+      "resultId": "res_hist_orphaned_result_01",
+      "attemptId": "att_non_existent_orphan_01",
+      "testId": "test_gate_2024",
+      "userId": "student_orphan_02",
+      "totalScore": 40,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 40
+        }
+      ]
+    },
+    {
+      "resultId": "res_dup_entry_A",
+      "attemptId": "att_hist_duplicate_result_01",
+      "testId": "test_bpsc_2023",
+      "userId": "student_dup_01",
+      "totalScore": 50,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 50,
+          "sectionId": "general_studies"
+        }
+      ]
+    },
+    {
+      "resultId": "res_dup_entry_B",
+      "attemptId": "att_hist_duplicate_result_01",
+      "testId": "test_bpsc_2023",
+      "userId": "student_dup_01",
+      "totalScore": 60,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 60,
+          "sectionId": "general_studies"
+        }
+      ]
+    },
+    {
+      "resultId": "att_hist_score_mismatch_01",
+      "attemptId": "att_hist_score_mismatch_01",
+      "testId": "test_jee_2024",
+      "userId": "student_tamper_01",
+      "totalScore": 999,
+      "breakdown": [
+        {
+          "questionId": "q1",
+          "marksAwarded": 4,
+          "sectionId": "math_a"
+        }
+      ]
+    }
+  ]
+}

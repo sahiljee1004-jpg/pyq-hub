@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VidyarthiAstra — Live Exam Updates</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-overrides.css">
+    <link rel="stylesheet" href="css/live-updates.css">
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skeleton.css">
+</head>
+<body class="live-updates-body">
+
+    <!-- HEADER -->
+    <header class="live-header">
+        <div class="live-header-left">
+            <a href="index.html" id="backBtn" class="live-back-btn" aria-label="Back">
+                ←
+            </a>
+            <div class="header-page-logo" aria-label="VidyarthiAstra logo">
+                <img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img">
+            </div>
+            <div class="live-header-title">
+                <h1>Live Updates</h1>
+                <p>Latest exam announcements and updates</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="live-container">
+
+        <!-- SEARCH CONTROLS CARD -->
+        <div class="live-controls-card">
+            <div class="live-search-wrapper">
+                <svg class="live-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="live-search-input"
+                    placeholder="Search for exam updates"
+                    aria-label="Search for exam updates"
+                    autocomplete="off"
+                >
+            </div>
+
+            <button type="button" id="searchBtn" class="live-search-btn" aria-label="Search">
+                Search
+            </button>
+        </div>
+
+        <!-- SEARCH VALIDATION MESSAGE CONTAINER -->
+        <div id="validationContainer"></div>
+
+        <!-- SEARCH CONTEXT / RESULT METADATA BAR -->
+        <div id="searchContextBar" class="live-search-context-bar" style="display: none;">
+            <span class="live-search-context-text">Search results for: <strong id="contextQueryText"></strong></span>
+            <span id="contextCountText" class="live-search-context-count"></span>
+        </div>
+
+        <!-- ERROR CONTAINER -->
+        <div id="errorContainer"></div>
+
+        <!-- INITIAL INSTRUCTIONAL STATE (Shown when no search performed yet) -->
+        <div id="initialStateText" class="live-initial-info">
+            <p>Search for an exam to see the latest announcements and updates.</p>
+        </div>
+
+        <!-- UPDATES FEED -->
+        <section id="updatesFeed" class="live-feed-container">
+            <!-- Dynamically populated on search -->
+        </section>
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/live-updates.js"></script>
+    <script type="module" src="js/skeleton-manager.js"></script>
+</body>
+</html>
+

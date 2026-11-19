@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VidyarthiAstra AI Assistant — Study & Exam Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-overrides.css">
+    <link rel="stylesheet" href="css/ai-chat.css">
+    <link rel="icon" type="image/png" href="assets/branding/favicon.png">
+    <link rel="apple-touch-icon" href="assets/branding/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/skeleton.css">
+</head>
+<body class="ai-chat-body">
+
+    <!-- HEADER -->
+    <header class="ai-chat-header">
+        <div class="ai-chat-header-left">
+            <a href="index.html" id="backBtn" class="ai-back-btn" aria-label="Back">
+                ←
+            </a>
+            <div class="header-page-logo" aria-label="VidyarthiAstra logo">
+                <img src="assets/branding/vidyarthiastra-logo.png" alt="VidyarthiAstra logo" class="brand-logo-img">
+            </div>
+            <div class="ai-header-title">
+                <h1>VidyarthiAstra AI Assistant</h1>
+                <p>Ask questions, solve PYQs, and study smarter.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="live-updates.html" class="ai-shortcut-btn">
+                Live Updates
+            </a>
+            <button type="button" id="clearChatBtn" class="ai-clear-btn">
+                Clear Chat
+            </button>
+        </div>
+    </header>
+
+
+    <!-- SUGGESTED QUESTIONS CHIPS -->
+    <div id="aiSuggestionsContainer" class="ai-suggestions-container">
+        <div class="ai-suggestions-title">Suggested Questions</div>
+        <div class="ai-suggestions-scroll">
+            <button class="ai-suggestion-chip" data-question="Solve Q13 from JEE Main 2025 Shift 2">
+                JEE Main 2025 Shift 2 Q13
+            </button>
+            <button class="ai-suggestion-chip" data-question="What is Newton's second law?">
+                Newton's Second Law
+            </button>
+            <button class="ai-suggestion-chip" data-question="Explain recursion in simple terms.">
+                Explain Recursion
+            </button>
+            <button class="ai-suggestion-chip" data-question="Give me a 30-day JEE Main study plan.">
+                30-Day Study Plan
+            </button>
+            <button class="ai-suggestion-chip" data-question="What is the difference between TCP and UDP?">
+                TCP vs UDP
+            </button>
+        </div>
+    </div>
+
+    <!-- CHAT MESSAGES AREA -->
+    <main id="chatContainer" class="ai-chat-container">
+        <!-- Messages appended dynamically -->
+    </main>
+
+    <!-- LOCKED AI ASSISTANT SCREEN (Shown when AI_ASSISTANT_ENABLED = false) -->
+    <div id="aiLockedContainer" class="ai-locked-container" style="display: none;">
+        <div class="ai-locked-card">
+            <h2 class="ai-locked-title">Coming Soon</h2>
+            <button type="button" id="askGptLockedBtn" class="ai-locked-gpt-btn">
+                Ask GPT for now
+            </button>
+        </div>
+    </div>
+
+    <!-- INPUT BAR -->
+    <footer id="aiInputArea" class="ai-input-area">
+        <div class="ai-input-wrapper">
+            <input
+                type="text"
+                id="messageInput"
+                class="ai-chat-input"
+                placeholder="Ask anything about your studies or solve PYQs..."
+                maxlength="1000"
+                autocomplete="off"
+            >
+        </div>
+        <button type="button" id="sendButton" class="ai-send-btn" aria-label="Send message">
+            ➔
+        </button>
+    </footer>
+
+    <!-- JAVASCRIPT MODULES -->
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/ai-chat.js"></script>
+    <script type="module" src="js/skeleton-manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,501 @@
+/* ============================================================
+   VIDYARTHIVERSE — MOBILE OVERRIDES & CAPACITOR NATIVE UI STYLES
+   ============================================================ */
+
+/* 1. Safe Area Insets for Android Status Bar & Navigation Bar */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+body {
+  padding-top: var(--sat);
+  padding-bottom: var(--sab);
+  padding-left: var(--sal);
+  padding-right: var(--sar);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* 2. Header & Safe Area Adjustments */
+.site-header {
+  padding-top: calc(12px + var(--sat));
+  max-width: 100%;
+  min-width: 0;
+}
+
+.header-inner {
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 20px;
+    flex-shrink: 0;
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .brand-logo-img {
+    height: 38px;
+    max-width: 155px;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 18px 6px 18px;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav a {
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .nav a:not(.profile-circle):not(.auth-button) {
+    font-size: 14.5px;
+    padding: 4px 6px;
+  }
+}
+
+/* 3. Touch Targets (Min 44px height & width for inputs and primary buttons) */
+button:not(.forgot-password):not(.auth-modal-close):not(.auth-tab):not(.modal-auth-switch button):not(.profile-circle):not(.ai-clear-btn):not(.live-refresh-btn):not(.ai-suggestion-chip):not(.live-category-chip):not(.floating-chatbot-btn), 
+.btn, 
+.primary-btn, 
+.google-btn, 
+.auth-button, 
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+  min-height: 46px;
+  font-size: 16px !important; /* Prevents auto-zoom on WebView input focus */
+  border-radius: 12px;
+}
+
+button:active, 
+.btn:active, 
+.exam-card:active, 
+.year-card:active, 
+.paper-card:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* 4. Search Box Mobile Responsiveness */
+@media (max-width: 580px) {
+  .search-box {
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .search-box input {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  }
+
+  .search-box button {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 12px;
+  }
+}
+
+/* 5. Exam & Year Grids Mobile Adaptation */
+@media (max-width: 640px) {
+  .exam-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .exam-card {
+    padding: 16px 18px;
+  }
+
+  .year-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .year-card {
+    padding: 16px 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .year-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 6. Papers List & Action Stacking on Small Screens */
+@media (max-width: 640px) {
+  .paper-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .paper-actions {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .paper-actions .btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .paper-number {
+    display: none;
+  }
+}
+
+/* 7. PDF Viewer Fullscreen Overlay for Native Mobile */
+.pdf-viewer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-viewer.hidden {
+  display: none !important;
+}
+
+.pdf-viewer-header {
+  min-height: 56px;
+  padding: 8px 12px;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid #334155;
+  padding-top: calc(8px + var(--sat));
+}
+
+.pdf-viewer-title {
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 28%;
+}
+
+.pdf-zoom-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pdf-zoom-toolbar .zoom-btn,
+.pdf-zoom-toolbar .zoom-level-btn,
+.pdf-zoom-toolbar .zoom-fit-btn {
+  color: #f8fafc;
+  background: transparent;
+  min-width: 28px;
+  height: 28px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pdf-zoom-toolbar .zoom-btn:hover,
+.pdf-zoom-toolbar .zoom-level-btn:hover,
+.pdf-zoom-toolbar .zoom-fit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.pdf-zoom-toolbar .zoom-level-btn {
+  background: rgba(255, 255, 255, 0.15);
+  min-width: 40px;
+}
+
+@media (max-width: 480px) {
+  .pdf-viewer-title {
+    display: none; /* Hide title text on narrow mobile screens to prioritize zoom toolbar */
+  }
+
+  .pdf-zoom-toolbar {
+    gap: 2px;
+    padding: 2px 3px;
+  }
+}
+
+.pdf-viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.viewer-close {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.pdf-viewer-body {
+  flex: 1 1 0%;
+  min-height: 0;
+  width: 100%;
+  height: calc(100% - 56px);
+  background: #334155;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-viewer-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#pdfFrame.hidden,
+.pdf-viewer iframe.hidden,
+.pdf-viewer-body iframe.hidden {
+  display: none !important;
+}
+
+/* 8. Auth Modal Mobile Optimization */
+@media (max-width: 600px) {
+  .auth-modal {
+    touch-action: none !important;
+    overflow: hidden !important;
+  }
+
+  .auth-modal-card {
+    width: min(390px, calc(100vw - 28px)) !important;
+    max-width: calc(100vw - 28px) !important;
+    max-height: calc(100dvh - 32px) !important;
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    touch-action: pan-y !important;
+    box-sizing: border-box !important;
+    margin: auto !important;
+  }
+  
+  .auth-modal-form label {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .auth-modal-form input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 16px !important; /* Prevents auto-zoom on iOS/Android WebView focus */
+  }
+
+  .auth-modal-header h2 {
+    font-size: 19px !important;
+  }
+}
+
+/* 9. PDF.js Inline Canvas & State Messaging */
+.pdf-state-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 280px;
+  padding: 24px;
+  text-align: center;
+  color: #f8fafc;
+  background: #0f172a;
+}
+
+.pdf-state-msg.hidden {
+  display: none !important;
+}
+
+.pdf-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: pdf-spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes pdf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pdf-error-icon {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.pdf-state-msg h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #f8fafc;
+}
+
+.pdf-state-msg p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 18px;
+}
+
+.pdf-canvas-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: #334155;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pdf-canvas-container:empty {
+  display: flex;
+}
+
+.pdf-page-wrapper {
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.pdf-page-canvas {
+  display: block !important;
+  margin: 0 auto !important;
+  max-width: none;
+}
+
+.pdf-page-number {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 8px;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+}
+
+.pdf-error-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pdf-btn-primary {
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pdf-btn-secondary {
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #334155;
+  color: #ffffff;
+  border: 1px solid #475569;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .floating-chatbot-btn {
+    width: 64px !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    padding: 6px !important;
+  }
+
+  .chatbot-icon-img {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .floating-chatbot-label {
+    display: none !important;
+  }
+}
+
